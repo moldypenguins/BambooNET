@@ -35,6 +35,10 @@ git clone https://github.com/moldypenguins/BambooNET.git
 ```
 
 
+## Documentation
+[BambooHR API Reference](https://documentation.bamboohr.com/reference)  
+
+
 ## Code of Conduct
 This project has adopted the code of conduct defined by the [Contributor Covenant](http://contributor-covenant.org/) to clarify expected behavior.  
 For more information see the [Code of Conduct](CODE_OF_CONDUCT.md).
