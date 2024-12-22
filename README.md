@@ -1,7 +1,4 @@
-<picture>
-  <img alt="logo" src=".github/images/BambooHR.png">
-</picture>
-
+<img alt="logo" src=".github/images/BambooHR.png">
 <h1>BambooNET</h1>
 <b>BambooHR API .NET Client</b>
 
