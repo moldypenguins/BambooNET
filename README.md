@@ -51,11 +51,20 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
 
 
 ## Author
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/images/cr_white.png">
+  <source media="(prefers-color-scheme: light)" srcset=".github/images/cr_black.png">
+  <img alt="logo" src=".github/images/cr_black.png">
+</picture>
+
+<div style="margin-left: 20px;">
+
 _**Craig Roberts**_  
 [![GitHub](https://img.shields.io/badge/moldypenguins-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/moldypenguins)
 [![Discord](https://img.shields.io/badge/@moldypenguins-5865F2?labelColor=555555&logo=discord&style=for-the-badge)](https://discordapp.com/users/346771877211144194)
 [![Telegram](https://img.shields.io/badge/@moldypenguins-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/moldypenguins)  
 
+</div>
 
 ## License
 Copyright © 2024 CR Development. Licensed under the MIT license.  
