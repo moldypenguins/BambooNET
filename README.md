@@ -1,6 +1,7 @@
-<img alt="logo" src=".github/images/BambooHR.png">
-<h1>BambooNET</h1>
-<b>BambooHR API .NET Client</b>
+[![BambooNET][bamboohr-src]][github-href]
+
+# BambooNET
+**BambooHR API .NET Client**
 
 ---
 
@@ -55,9 +56,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
 </picture>
 
 _**Craig Roberts**_  
-[![GitHub](https://img.shields.io/badge/moldypenguins-6e5494?labelColor=555555&logo=github&style=for-the-badge)](https://github.com/moldypenguins)
-[![Discord](https://img.shields.io/badge/@moldypenguins-5865F2?labelColor=555555&logo=discord&style=for-the-badge)](https://discordapp.com/users/346771877211144194)
-[![Telegram](https://img.shields.io/badge/@moldypenguins-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge)](https://t.me/moldypenguins)  
+[![GitHub][moldypenguins-github]](https://github.com/moldypenguins)
+[![Discord][moldypenguins-discord]](https://discordapp.com/users/346771877211144194)
+[![Telegram][moldypenguins-telegram]](https://t.me/moldypenguins)  
 
 
 ## License
@@ -67,21 +68,21 @@ See [LICENSE.md](LICENSE.md) or [https://opensource.org/license/mit](https://ope
 
 
 
-<!-- Badges -->
-[logo-src]: https://raw.githubusercontent.com/moldypenguins/BambooNET/master/.github/images/BambooHR.png
-
+<!-- Images / Badges -->
+[bamboohr-src]: .github/images/BambooHR.png
+[moldypenguins-github]: https://img.shields.io/badge/moldypenguins-6e5494?labelColor=555555&logo=github&style=for-the-badge
+[moldypenguins-discord]: https://img.shields.io/badge/@moldypenguins-5865F2?labelColor=555555&logo=discord&style=for-the-badge
+[moldypenguins-telegram]: https://img.shields.io/badge/@moldypenguins-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge
+[license-src]: https://img.shields.io/github/license/moldypenguins/BambooNET?color=36699A&style=for-the-badge&logo=GitHub
+[codeql-src]: https://img.shields.io/badge/CodeQL-30363D?style=for-the-badge&logo=github&logoColor=white
+[dependabot-src]: https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white
+[sponsors-src]: https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=EA4AAA
+[sponsors-href]: https://github.com/sponsors/moldypenguins
 [downloads-src]: https://img.shields.io/nuget/dt/moldypenguins.BambooNET?style=for-the-badge&logo=NuGet
 [version-src]: https://img.shields.io/nuget/v/moldypenguins.BambooNET?style=for-the-badge&logo=NuGet
-[license-src]: https://img.shields.io/github/license/moldypenguins/BambooNET?color=36699A&style=for-the-badge&logo=GitHub
 [nuget-href]: https://www.nuget.org/packages/BambooNET
-
 [openissues-src]: https://img.shields.io/github/issues-raw/moldypenguins/BambooNET?style=for-the-badge&logo=GitHub
 [pullrequests-src]: https://img.shields.io/github/issues-pr-raw/moldypenguins/BambooNET?style=for-the-badge&logo=GitHub
 [lastcommit-src]: https://img.shields.io/github/last-commit/moldypenguins/BambooNET?style=for-the-badge&logo=GitHub
 [github-href]: https://github.com/moldypenguins/BambooNET
 
-[codeql-src]: https://img.shields.io/badge/CodeQL-30363D?style=for-the-badge&logo=github&logoColor=white
-[eslint-src]: https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white
-[dependabot-src]: https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white
-[sponsors-src]: https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=EA4AAA
-[sponsors-href]: https://github.com/sponsors/moldypenguins
