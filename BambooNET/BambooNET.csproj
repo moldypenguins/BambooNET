@@ -14,17 +14,20 @@
     <Authors>Craig Roberts</Authors>
     <Company>CR Development</Company>
     <Product>BambooNET</Product>
-    <PackageId>BambooNET</PackageId>
-    <Description>BambooHR .NET API Client</Description>
+    <PackageId>CRDevelopment.BambooNET</PackageId>
+    <Description>This client library enables working with the BambooHR API.</Description>
     <Copyright>Copyright © 2024 CR Development</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <RepositoryUrl>https://github.com/moldypenguins/BambooNET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>$(VersionPrefix)</Version>
-    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
-    <FileVersion>$(VersionPrefix)</FileVersion>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageIcon>BambooHR.png</PackageIcon>
+    <PackageTags>BambooHR</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -37,6 +40,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.github\images\BambooHR.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\LICENSE.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
