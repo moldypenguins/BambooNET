@@ -61,7 +61,7 @@ See [LICENSE.md](LICENSE.md) or [https://opensource.org/license/mit](https://ope
 
 
 <!-- Badges -->
-[logo-src]: https://raw.githubusercontent.com/moldypenguins/BambooNET/master/.github/images/BambooNET.png
+[logo-src]: https://raw.githubusercontent.com/moldypenguins/BambooNET/master/.github/images/BambooHR.png
 
 [downloads-src]: https://img.shields.io/nuget/dt/moldypenguins.BambooNET?style=for-the-badge&logo=NuGet
 [version-src]: https://img.shields.io/nuget/v/moldypenguins.BambooNET?style=for-the-badge&logo=NuGet
