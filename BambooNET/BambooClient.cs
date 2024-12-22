@@ -153,23 +153,11 @@ public partial class BambooClient
 
     else if (response.StatusCode == HttpStatusCode.OK)
     {
-      // sanitize data
-      var sanitized = new StringBuilder();
-      foreach (var ch in response.Content)
-      {
-        // remove any characters outside the valid UTF-8 range as well as all control characters except tabs and new lines
-        if ((ch < 0x00FD && ch > 0x001F) || ch == '\t' || ch == '\n' || ch == '\r')
-        {
-          sanitized.Append(ch);
-        }
-      }
-      // replace non-breaking space and left-to-right mark
-      sanitized.Replace(@"\u00a0", @"\u0020").Replace(@"\u200e", "");
       // replace null dates
-      sanitized.Replace($"Date\":\"{NumbersLetters().Replace(DateFormat, "0")}\"", "Date\":null");
+      var sanitized = response.Content.Replace($"Date\":\"{NumbersLetters().Replace(DateFormat, "0")}\"", "Date\":null");
 
       // deserialize data
-      var package = JsonConvert.DeserializeObject<T>(sanitized.ToString());
+      var package = JsonConvert.DeserializeObject<T>(sanitized);
       if (package != null)
       {
         return package;

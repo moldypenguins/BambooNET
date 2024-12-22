@@ -30,9 +30,11 @@ public class Program
 
       var bambooClient = new BambooClient("company_subdomain", "api_key");
 
-      var results = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(new DateOnly(2024, 11, 30), new DateOnly(2024, 12, 13));
+      var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(new DateOnly(2024, 11, 30), new DateOnly(2024, 12, 13));
+      Console.WriteLine($"GetTimesheetEntriesAsync Results: {timesheets.Count}");
 
-      Console.WriteLine($"Results: {results.Count}");
+      var requests = await bambooClient.TimeOff.GetTimeOffRequestsAsync(new DateOnly(2024, 11, 30), new DateOnly(2024, 12, 13));
+      Console.WriteLine($"GetTimeOffRequestsAsync Results: {requests.Count}");
 
       Console.WriteLine("Press any key to exit...");
       Console.ReadKey();
