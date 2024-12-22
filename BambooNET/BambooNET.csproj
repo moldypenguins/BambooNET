@@ -1,19 +1,68 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <RootNamespace>BambooNET</RootNamespace>
+    <AssemblyName>BambooNET</AssemblyName>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <SignAssembly>False</SignAssembly>
+    <ErrorReport>none</ErrorReport>
+    <Title>BambooNET</Title>
+    <Authors>Craig Roberts</Authors>
+    <Company>CR Development</Company>
+    <Product>BambooNET</Product>
+    <PackageId>BambooNET</PackageId>
+    <Description>BambooHR .NET API Client</Description>
+    <Copyright>Copyright © 2024 CR Development</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/moldypenguins/BambooNET</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Version>$(VersionPrefix)</Version>
+    <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+    <FileVersion>$(VersionPrefix)</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+    <IsPublishable>False</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <IsPublishable>False</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
     <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="112.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="System.Collections.ObjectModel" />
+    <Using Include="System.Net" />
+    <Using Include="System.Reflection" />
+    <Using Include="System.Text" />
+    <Using Include="System.Text.RegularExpressions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Contracts\" />
   </ItemGroup>
 
 </Project>

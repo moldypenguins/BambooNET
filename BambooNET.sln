@@ -1,9 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BambooNET", "BambooNET\BambooNET.csproj", "{B819BCD0-A963-4806-AB8C-890B031481D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5CB738FD-C697-4016-80E9-BC4B07C14715}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BambooNET.Test", "BambooNET.Test\BambooNET.Test.csproj", "{0868B5EC-70C1-4CD9-9368-4B1AE856B79D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +24,10 @@ Global
 		{B819BCD0-A963-4806-AB8C-890B031481D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B819BCD0-A963-4806-AB8C-890B031481D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B819BCD0-A963-4806-AB8C-890B031481D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0868B5EC-70C1-4CD9-9368-4B1AE856B79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0868B5EC-70C1-4CD9-9368-4B1AE856B79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0868B5EC-70C1-4CD9-9368-4B1AE856B79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0868B5EC-70C1-4CD9-9368-4B1AE856B79D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
