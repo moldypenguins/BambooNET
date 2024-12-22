@@ -5,16 +5,15 @@
 
 ---
 
-![CodeQL][codeql-src]
-![Dependabot][dependabot-src]
-[![GitHub Sponsors][sponsors-src]][sponsors-href]  
 [![License][license-src]](LICENSE.md)
 [![Version][version-src]][nuget-href]
 [![Downloads][downloads-src]][nuget-href]  
 [![Open Issues][openissues-src]][github-href]
 [![Open Pull Requests][pullrequests-src]][github-href]
 [![Last Commit][lastcommit-src]][github-href]  
-
+![CodeQL][codeql-src]
+![Dependabot][dependabot-src]
+[![GitHub Sponsors][sponsors-src]][sponsors-href]  
 
 ---
 
