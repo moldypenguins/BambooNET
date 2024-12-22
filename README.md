@@ -1,7 +1,11 @@
-# BambooNET
-**BambooHR API .NET Client**  
+<picture>
+  <img alt="logo" src=".github/images/BambooHR.png">
+</picture>
 
-*Version: 1.0.0-alpha*  
+<h1>BambooNET</h1>
+<b>BambooHR API .NET Client</b>
+
+---
 
 [![License][license-src]][github-href]
 [![Version][version-src]][nuget-href]
