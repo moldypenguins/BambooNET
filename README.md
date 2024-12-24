@@ -24,7 +24,6 @@
 * [Code of Conduct](#code-of-conduct)
 * [Issues / Support](#issues-/-support)
 * [Contributing](#contributing)
-* [Attributions](#attributions)
 * [Author](#author)
 * [License](#license)
 
