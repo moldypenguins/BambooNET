@@ -61,7 +61,7 @@ catch (Exception ex)
 ```
 
 ## Reference
-[BambooHR API Reference](https://documentation.bamboohr.com/reference)  
+* [BambooHR API Reference](https://documentation.bamboohr.com/reference)  
 
 
 ## Code of Conduct
