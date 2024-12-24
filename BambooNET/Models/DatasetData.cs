@@ -42,9 +42,7 @@ public class DatasetData<T> where T : DataAbstract
   /// Pagination
   /// </summary>
   [JsonProperty("pagination")]
-  public DatasetDataPagination Pagination { get; set; }
-
-
+  public DatasetPagination Pagination { get; set; }
 
 
 } //end public abstract class DatasetData<T> where T : EmployeeDataAbstract

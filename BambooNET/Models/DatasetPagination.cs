@@ -14,16 +14,16 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name DatasetDataPagination.cs
+/// @name DatasetPagination.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
 /// <summary>
-/// DatasetDataPagination
+/// DatasetPagination
 /// </summary>
-public class DatasetDataPagination
+public class DatasetPagination
 {
   /// <summary>
   /// TotalRecords
@@ -55,6 +55,6 @@ public class DatasetDataPagination
   [JsonProperty("prev_page")]
   public int? PrevPage { get; set; }
 
-} //end public class DatasetDataPagination
+} //end public class DatasetPagination
 
 

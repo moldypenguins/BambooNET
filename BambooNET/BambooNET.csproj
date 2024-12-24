@@ -21,7 +21,7 @@
     <RepositoryUrl>https://github.com/moldypenguins/BambooNET</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>0.1.1</Version>
+    <Version>0.1.2</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -34,10 +34,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>
     <IsPublishable>False</IsPublishable>
+    <NoWarn>1701;1702;1587</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <IsPublishable>False</IsPublishable>
+    <NoWarn>1701;1702;1587</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

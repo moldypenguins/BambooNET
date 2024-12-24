@@ -31,11 +31,14 @@ namespace BambooNET;
 /// </summary>
 public partial class BambooClient
 {
-  private readonly RestClient _RestClient;
-
   private const string _APIBaseUri = "https://api.bamboohr.com/api/gateway.php";
 
-  private readonly string _CompanySubdomain = string.Empty;
+  private readonly string _CompanySubdomain;
+
+  /// <summary>
+  /// RestSharp.RestClient
+  /// </summary>
+  private readonly RestClient _RestClient;
 
   /// <summary>
   /// DateFormat
@@ -43,11 +46,20 @@ public partial class BambooClient
   /// </summary>
   internal string DateFormat { get; private set; } = "yyyy-MM-dd";
 
+  /// <summary>
+  /// Regex for number and letter characters
+  /// </summary>
+  /// <returns></returns>
   [GeneratedRegex(@"[0-9a-zA-Z]")]
   private static partial Regex NumbersLetters();
 
 
   #region Endpoints
+
+  /// <summary>
+  /// Datasets Endpoint
+  /// </summary>
+  public Endpoints.Datasets Datasets { get; }
 
   /// <summary>
   /// Employees Endpoint
@@ -93,12 +105,12 @@ public partial class BambooClient
     if (date_format != null) { DateFormat = date_format; }
 
     // initialize endpoints
+    Datasets = new(this);
     Employees = new(this);
     TimeOff = new(this);
     TimeTracking = new(this);
     
   } //end public BambooClient(string company_subdomain, string api_key)
-
 
 
   /// <summary>

@@ -20,6 +20,7 @@
 /// </summary>
 using BambooNET.Models;
 using RestSharp;
+using RestSharp.Extensions;
 
 namespace BambooNET.Endpoints;
 
@@ -82,20 +83,32 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
   /// <returns></returns>
   public async Task<DatasetData<T>> GetDatasetDataAsync<T>(string dataset_name) where T : DataAbstract
   {
+    // add properties of T to fields
+    var properties = typeof(T).GetProperties();
+    if (properties.Length <= 0)
+    {
+      throw new Exception($"Unable to find properties of type {typeof(T)}");
+    }
+    var fields = string.Join(',', properties.Select(f =>
+    {
+      var j = f.GetAttribute<JsonPropertyAttribute>();
+      return (j != null) ? j.PropertyName : f.Name;
+    }).ToArray());
+
+    // set required parameters
+    Collection<MetaData> metadata = [new("fields", fields)];
+
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<DatasetData<T>>(Method.Get, $"/v1/datasets/{dataset_name}");
+      return await _BambooClient.ExecuteRequestAsync<DatasetData<T>>(Method.Post, $"/v1/datasets/{dataset_name}", metadata);
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooNET.Endpoints.Datasets.GetDataSetsAsync", ex);
     }
 
-  }
+  } //end public async Task<DatasetData<T>> GetDatasetDataAsync<T>
 
 
-
-
-
-  } //end public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_client)
+} //end public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_client)

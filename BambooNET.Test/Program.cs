@@ -18,10 +18,20 @@
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
+using BambooNET;
+using BambooNET.Endpoints;
+using BambooNET.Helpers;
+using BambooNET.Models;
+using Newtonsoft.Json;
+
 namespace BambooNET.Test;
 
 public class Program
 {
+  private static readonly int BAMBOO_ID = 225;
+  private static readonly DateTime START_DATE = new(2024, 11, 30);
+  private static readonly DateTime END_DATE = new(2024, 12, 13);
+
   public static async Task Main(string[] args)
   {
     try
@@ -30,15 +40,34 @@ public class Program
 
       var bambooClient = new BambooClient("company_subdomain", "api_key");
 
-      var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(new DateOnly(2024, 11, 30), new DateOnly(2024, 12, 13));
-      Console.WriteLine($"GetTimesheetEntriesAsync Results: {timesheets.Count}");
 
-      var requests = await bambooClient.TimeOff.GetTimeOffRequestsAsync(new DateOnly(2024, 11, 30), new DateOnly(2024, 12, 13));
-      Console.WriteLine($"GetTimeOffRequestsAsync Results: {requests.Count}");
+      var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(START_DATE, END_DATE);
+      Console.WriteLine($"TimeTracking.GetTimesheetEntriesAsync Results: {timesheets.Count}");
 
-      Console.WriteLine("Press any key to exit...");
-      Console.ReadKey();
 
+      var requests = await bambooClient.TimeOff.GetRequestsAsync(START_DATE, END_DATE);
+      Console.WriteLine($"TimeOff.GetRequestsAsync Results: {requests.Count}");
+
+
+      var whosout = await bambooClient.TimeOff.GetWhosOutAsync(START_DATE, END_DATE);
+      Console.WriteLine($"TimeOff.GetWhosOutAsync Results: {whosout.Count}");
+
+
+      var employeedata = await bambooClient.Employees.GetEmployeeDataAsync(BAMBOO_ID);
+      Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.Count}");
+
+
+      var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
+      Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
+
+
+      //var dataset = await bambooClient.Datasets.GetDatasetData<EmployeeDataAbstract>();
+      //Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
+
+
+
+
+      Console.WriteLine("Done.");
     }
     catch (Exception ex)
     {
@@ -47,4 +76,53 @@ public class Program
 
   } //end public static async void Main(string[] args)
 
+
+
+
 } //end public class Program
+
+
+
+
+
+
+
+
+
+internal class JobInfoData : DataAbstract
+{
+  //public int Id { get; set; }
+
+  [JsonProperty("employeeId")]
+  public int EmployeeId { get; set; }
+
+  [JsonProperty("date")]
+  public DateTime? Date { get; set; }
+
+  [JsonProperty("location")]
+  public string Location { get; set; }
+
+  [JsonProperty("department")]
+  public string Department { get; set; }
+
+  [JsonProperty("division")]
+  public string Division { get; set; }
+
+  [JsonProperty("jobTitle")]
+  public string JobTitle { get; set; }
+
+  [JsonProperty("reportsTo")]
+  public string ReportsTo { get; set; }
+
+
+  /// <summary>
+  /// 
+  /// </summary>
+  /// <returns></returns>
+  public override string ToString()
+  {
+    return $"Date: {Date:yyyy-MM-dd}, Location: {Location}, Department: {Department}, Division: {Division}, JobTitle: {JobTitle}, ReportsTo: {ReportsTo}";
+  }
+
+} //end internal class TableData : DataAbstract
+

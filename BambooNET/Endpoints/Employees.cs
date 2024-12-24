@@ -87,7 +87,7 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
     }
 
   } //end public async Task<Collection<T>> GetEmployeeDataAsync<T>
-
+  
 
   /// <summary>
   /// Get employee data by specifying a set of fields. This is suitable for getting basic employee information, 
@@ -95,7 +95,6 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// See the fields endpoint for a list of possible fields.
   /// </summary>
   /// <param name="bamboo_id"></param>
-  /// <param name="fields"></param>
   /// <param name="only_current"></param>
   /// <returns></returns>
   public async Task<Collection<EmployeeDataAbstract>> GetEmployeeDataAsync(int bamboo_id, bool? only_current = null)
