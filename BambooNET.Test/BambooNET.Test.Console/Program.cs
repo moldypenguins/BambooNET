@@ -24,7 +24,7 @@ using BambooNET.Helpers;
 using BambooNET.Models;
 using Newtonsoft.Json;
 
-namespace BambooNET.Test;
+namespace BambooNET.Test.Console;
 
 public class Program
 {
@@ -36,29 +36,29 @@ public class Program
   {
     try
     {
-      Console.WriteLine("Running...");
+      System.Console.WriteLine("Running...");
 
       var bambooClient = new BambooClient("company_subdomain", "api_key");
 
 
       var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(START_DATE, END_DATE);
-      Console.WriteLine($"TimeTracking.GetTimesheetEntriesAsync Results: {timesheets.Count}");
+      System.Console.WriteLine($"TimeTracking.GetTimesheetEntriesAsync Results: {timesheets.Count}");
 
 
       var requests = await bambooClient.TimeOff.GetRequestsAsync(START_DATE, END_DATE);
-      Console.WriteLine($"TimeOff.GetRequestsAsync Results: {requests.Count}");
+      System.Console.WriteLine($"TimeOff.GetRequestsAsync Results: {requests.Count}");
 
 
       var whosout = await bambooClient.TimeOff.GetWhosOutAsync(START_DATE, END_DATE);
-      Console.WriteLine($"TimeOff.GetWhosOutAsync Results: {whosout.Count}");
+      System.Console.WriteLine($"TimeOff.GetWhosOutAsync Results: {whosout.Count}");
 
 
       var employeedata = await bambooClient.Employees.GetEmployeeDataAsync(BAMBOO_ID);
-      Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.Count}");
+      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.Count}");
 
 
       var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
-      Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
+      System.Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
 
 
       //var dataset = await bambooClient.Datasets.GetDatasetData<EmployeeDataAbstract>();
@@ -67,11 +67,11 @@ public class Program
 
 
 
-      Console.WriteLine("Done.");
+      System.Console.WriteLine("Done.");
     }
     catch (Exception ex)
     {
-      Console.WriteLine(ex.ToString());
+      System.Console.WriteLine(ex.ToString());
     }
 
   } //end public static async void Main(string[] args)
@@ -80,12 +80,6 @@ public class Program
 
 
 } //end public class Program
-
-
-
-
-
-
 
 
 

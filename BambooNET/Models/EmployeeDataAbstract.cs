@@ -27,27 +27,34 @@ namespace BambooNET.Models;
 public abstract class EmployeeDataAbstract : DataAbstract
 {
   //public int Id { get; set; }
-  
-  [JsonProperty("employeeId")]
-  public int EmployeeId { get; set; }
+
+  /// <summary>
+  /// EmployeeNumber
+  /// </summary>
+  [JsonProperty("employeeNumber")]
+  public int? EmployeeNumber { get; set; }
+
 
   /// <summary>
   /// Status
   /// </summary>
   [JsonProperty("status")]
-  public string Status { get; set; }
+  public string Status { get; set; } = string.Empty;
+
 
   /// <summary>
   /// FirstName
   /// </summary>
   [JsonProperty("firstName")]
-  public string FirstName { get; set; }
+  public string FirstName { get; set; } = string.Empty;
+
 
   /// <summary>
   /// LastName
   /// </summary>
   [JsonProperty("lastName")]
-  public string LastName { get; set; }
+  public string LastName { get; set; } = string.Empty;
+
 
   /// <summary>
   /// Override base ToString()
@@ -55,7 +62,8 @@ public abstract class EmployeeDataAbstract : DataAbstract
   /// <returns></returns>
   public override string ToString()
   {
-    return $"Id: {Id}, EmployeeId: {EmployeeId}, Status: {Status}, FirstName: {FirstName}, LastName: {LastName}";
+    return $"Id: {Id}, EmployeeNumber: {EmployeeNumber}, Status: {Status}, FirstName: {FirstName}, LastName: {LastName}";
   }
+
 
 } //end internal class EmployeeDataAbstract : DataAbstract

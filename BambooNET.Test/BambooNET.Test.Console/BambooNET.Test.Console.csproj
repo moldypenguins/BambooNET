@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BambooNET\BambooNET.csproj" />
+    <ProjectReference Include="..\..\BambooNET\BambooNET.csproj" />
   </ItemGroup>
 
 </Project>

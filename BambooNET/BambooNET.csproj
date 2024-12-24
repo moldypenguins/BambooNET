@@ -11,7 +11,8 @@
     <SignAssembly>False</SignAssembly>
     <ErrorReport>none</ErrorReport>
     <Title>BambooNET</Title>
-    <Authors>CRDevelopment</Authors>
+    <Authors>moldypenguins</Authors>
+    <Company>CRDevelopment</Company>
     <Product>BambooNET</Product>
     <PackageId>CRDevelopment.BambooNET</PackageId>
     <Description>A .NET client library for the BambooHR API.</Description>
@@ -19,25 +20,25 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <RepositoryUrl>https://github.com/moldypenguins/BambooNET</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/moldypenguins/BambooNET</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>0.1.2</Version>
+    <Version>0.1.5</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>BambooHR.png</PackageIcon>
     <PackageTags>BambooHR</PackageTags>
-    <Company>CRDevelopment</Company>
-    <PackageProjectUrl>https://github.com/moldypenguins/BambooNET</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>embedded</DebugType>
     <IsPublishable>False</IsPublishable>
-    <NoWarn>1701;1702;1587</NoWarn>
+    <NoWarn>1701;1702</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
     <IsPublishable>False</IsPublishable>
     <NoWarn>1701;1702;1587</NoWarn>
   </PropertyGroup>

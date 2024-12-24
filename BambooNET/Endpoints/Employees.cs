@@ -65,12 +65,9 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   public async Task<Collection<T>> GetEmployeeDataAsync<T>(int bamboo_id, string[] fields, bool? only_current = null) where T : EmployeeDataAbstract
   {
     // add default fields to requested fields
-    HashSet<string> all_fields = ["id", "employeeId", "status", "firstName", "lastName", .. fields];
+    var all_fields = string.Join(',', new HashSet<string>(["id", "employeeNumber", "status", "firstName", "lastName", .. fields]));
     // set required parameters
-    Collection<MetaData> metadata =
-    [
-      new("fields", $"{string.Join(',', all_fields)}")
-    ];
+    Collection<MetaData> metadata = [new("fields", $"{all_fields}")];
     // set optional parameters
     if (only_current != null) { metadata.Add(new("onlyCurrent", $"{only_current.Value.ToString().ToLower()}")); }
 

@@ -1,11 +1,11 @@
 [![BambooNET][bamboohr-src]][github-href]
 
 # BambooNET
-**BambooHR API .NET Client**
+**A .NET client library for the BambooHR API.**
 
 ---
 
-[![License][license-src]](LICENSE.md)&nbsp;
+[![License][license-src]][nuget-href]&nbsp;
 [![Version][version-src]][nuget-href]&nbsp;
 [![Downloads][downloads-src]][nuget-href]&nbsp;
 
@@ -13,8 +13,8 @@
 [![Open Pull Requests][pullrequests-src]][github-href]&nbsp;
 [![Last Commit][lastcommit-src]][github-href]&nbsp;
 
-![Dependabot][dependabot-src]&nbsp;
-![CodeQL][codeql-src]&nbsp;
+[![Dependabot][dependabot-src]][sponsors-href]&nbsp;
+[![CodeQL][codeql-src]][sponsors-href]&nbsp;
 [![GitHub Sponsors][sponsors-src]][sponsors-href]&nbsp;
 
 ---
@@ -102,7 +102,7 @@ See [LICENSE.md](LICENSE.md) or [https://opensource.org/license/mit](https://ope
 [moldypenguins-github]: https://img.shields.io/badge/moldypenguins-6e5494?labelColor=555555&logo=github&style=for-the-badge
 [moldypenguins-discord]: https://img.shields.io/badge/@moldypenguins-5865F2?labelColor=555555&logo=discord&style=for-the-badge
 [moldypenguins-telegram]: https://img.shields.io/badge/@moldypenguins-27A7E7?labelColor=555555&logo=telegram&style=for-the-badge
-[license-src]: https://img.shields.io/github/license/moldypenguins/BambooNET?color=36699A&style=for-the-badge&logo=GitHub
+[license-src]: https://img.shields.io/badge/License-MIT-36699C?style=for-the-badge&logo=NuGet
 [codeql-src]: https://img.shields.io/badge/CodeQL-30363D?style=for-the-badge&logo=github&logoColor=white
 [dependabot-src]: https://img.shields.io/badge/dependabot-025E8C?style=for-the-badge&logo=dependabot&logoColor=white
 [sponsors-src]: https://img.shields.io/badge/sponsor-30363D?style=for-the-badge&logo=GitHub-Sponsors&logoColor=EA4AAA
