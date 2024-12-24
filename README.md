@@ -19,7 +19,8 @@
 
 ## Table of Contents
 
-* [Setup](#setup)
+* [Usage](#usage)
+* [Reference](#reference)
 * [Code of Conduct](#code-of-conduct)
 * [Issues / Support](#issues-/-support)
 * [Contributing](#contributing)
@@ -27,11 +28,6 @@
 * [Author](#author)
 * [License](#license)
 
-## Clone the repository
-
-```shell
-git clone https://github.com/moldypenguins/BambooNET.git
-```
 
 ## Usage  
 ```csharp
@@ -65,7 +61,7 @@ catch (Exception ex)
 }
 ```
 
-## Documentation
+## Reference
 [BambooHR API Reference](https://documentation.bamboohr.com/reference)  
 
 
