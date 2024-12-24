@@ -24,25 +24,27 @@ namespace BambooNET.Models;
 /// DatasetData
 /// </summary>
 /// <typeparam name="T"><see cref="DataAbstract"/></typeparam>
-public class DatasetData<T> where T : DataAbstract
+public class DatasetData<T>(Collection<T> data, string[] aggregations, DatasetPagination pagination) where T : DataAbstract
 {
   /// <summary>
   /// Data
   /// </summary>
   [JsonProperty("data")]
-  public Collection<T> Data { get; set; }
+  public Collection<T> Data { get; set; } = data;
+
 
   /// <summary>
   /// Aggregations
   /// </summary>
   [JsonProperty("aggregations")]
-  public string[] Aggregations { get; set; }
+  public string[] Aggregations { get; set; } = aggregations;
+
 
   /// <summary>
   /// Pagination
   /// </summary>
   [JsonProperty("pagination")]
-  public DatasetPagination Pagination { get; set; }
+  public DatasetPagination Pagination { get; set; } = pagination;
 
 
-} //end public abstract class DatasetData<T> where T : EmployeeDataAbstract
+} //end public abstract class DatasetData<T>() where T : DataAbstract

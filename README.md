@@ -5,15 +5,17 @@
 
 ---
 
-[![License][license-src]](LICENSE.md)
-[![Version][version-src]][nuget-href]
-[![Downloads][downloads-src]][nuget-href]  
-[![Open Issues][openissues-src]][github-href]
-[![Open Pull Requests][pullrequests-src]][github-href]
-[![Last Commit][lastcommit-src]][github-href]  
-![CodeQL][codeql-src]
-![Dependabot][dependabot-src]
-[![GitHub Sponsors][sponsors-src]][sponsors-href]  
+[![License][license-src]](LICENSE.md)&nbsp;
+[![Version][version-src]][nuget-href]&nbsp;
+[![Downloads][downloads-src]][nuget-href]&nbsp;
+
+[![Open Issues][openissues-src]][github-href]&nbsp;
+[![Open Pull Requests][pullrequests-src]][github-href]&nbsp;
+[![Last Commit][lastcommit-src]][github-href]&nbsp;
+
+![Dependabot][dependabot-src]&nbsp;
+![CodeQL][codeql-src]&nbsp;
+[![GitHub Sponsors][sponsors-src]][sponsors-href]&nbsp;
 
 ---
 

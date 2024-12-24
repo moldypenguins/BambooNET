@@ -30,7 +30,6 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
 {
   //internal readonly BambooClient _BambooClient = bamboo_client;
 
-
   /// <summary>
   /// This endpoint gets a list of time off policies.
   /// </summary>
@@ -50,7 +49,6 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
     }
 
   } //end public async Task<Collection<TimeOffPolicy>> GetTimeOffPoliciesAsync
-
 
 
   /// <summary>
@@ -104,8 +102,6 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   } //end public async Task<Collection<EmployeeDataAbstract>> GetEmployeeDataAsync
 
 
-
-
   /// <summary>
   /// Returns a data structure representing all the table rows for a given employee and table combination. The result is not sorted in any particular order.
   /// </summary>
@@ -127,7 +123,6 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
     }
 
   } //end public async Task<Collection<T>> GetTabularDataAsync<T>
-
 
 
 } //end public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_client)

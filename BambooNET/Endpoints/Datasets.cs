@@ -32,7 +32,6 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
 {
   //internal readonly BambooClient _BambooClient = bamboo_client;
 
-
   /// <summary>
   /// Use this resource to retrieve the available datasets to query data from.
   /// </summary>
@@ -51,7 +50,6 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
     }
 
   } //end public async Task<Collection<Dataset>> GetDataSetsAsync
-
 
 
   /// <summary>
@@ -73,7 +71,6 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
     }
 
   } //end public async Task<Collection<DatasetField>> GetDataSetFieldsAsync
-
 
 
   /// <summary>
