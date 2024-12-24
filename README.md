@@ -33,6 +33,37 @@
 git clone https://github.com/moldypenguins/BambooNET.git
 ```
 
+## Usage  
+```csharp
+static readonly int BAMBOO_ID = 123;
+static readonly DateTime START_DATE = new(2024, 11, 30);
+static readonly DateTime END_DATE = new(2024, 12, 13);
+
+try
+{
+  var bambooClient = new BambooClient("company_subdomain", "api_key");
+
+  var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(START_DATE, END_DATE);
+  Console.WriteLine($"TimeTracking.GetTimesheetEntriesAsync Results: {timesheets.Count}");
+
+  var requests = await bambooClient.TimeOff.GetRequestsAsync(START_DATE, END_DATE);
+  Console.WriteLine($"TimeOff.GetRequestsAsync Results: {requests.Count}");
+
+  var whosout = await bambooClient.TimeOff.GetWhosOutAsync(START_DATE, END_DATE);
+  Console.WriteLine($"TimeOff.GetWhosOutAsync Results: {whosout.Count}");
+
+  var employeedata = await bambooClient.Employees.GetEmployeeDataAsync(BAMBOO_ID);
+  Console.WriteLine($"Employees.GetTabularDataAsync Results: {employeedata.Count}");
+
+  var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
+  Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
+
+}
+catch (Exception ex)
+{
+  Console.WriteLine(ex.ToString());
+}
+```
 
 ## Documentation
 [BambooHR API Reference](https://documentation.bamboohr.com/reference)  
