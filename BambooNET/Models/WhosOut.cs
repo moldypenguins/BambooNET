@@ -14,34 +14,61 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name TimesheetEntry.cs
+/// @name WhosOut.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
 /// <summary>
-/// TimesheetEntry
+/// WhosOut
 /// </summary>
-public class TimesheetEntry
+public class WhosOut
 {
+  /// <summary>
+  /// 
+  /// </summary>
   public int Id { get; set; }
-  public int EmployeeId { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
   public string Type { get; set; }
-  public DateTime Date { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
+  public string EmployeeId { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
+  public string Name { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
   public DateTime? Start { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
   public DateTime? End { get; set; }
-  public string? Timezone { get; set; }
-  public float Hours { get; set; }
-  public string? Note { get; set; }
-  public ProjectInfo? ProjectInfo { get; set; }
-  public DateTime? ApprovedAt { get; set; }
-  public bool Approved { get; set; }
+
+  /// <summary>
+  /// 
+  /// </summary>
+  public bool IsTimeOff => Type.Equals("timeoff", StringComparison.OrdinalIgnoreCase);
+
+  /// <summary>
+  /// 
+  /// </summary>
+  public bool IsHoliday => Type.Equals("holiday", StringComparison.OrdinalIgnoreCase);
+
+  /// <summary>
+  /// 
+  /// </summary>
+  /// <returns></returns>
   public override string ToString()
   {
-    return $"ID: {Id}, Type: {Type}, EmployeeId: {EmployeeId}, Type: {Type} " +
-      $"Date: {Date:yyyy-MM-dd}, Hours: {Hours}, Note: {Note}, Approved: {Approved} ";
+    return $"ID: {Id}, Type: {Type}, EmployeeId: {EmployeeId}, Name: {Name}" + 
+      (Start.HasValue ? $", Start: {Start.Value.ToString("yyyy-MM-dd")}" : "") +
+      (End.HasValue ? $", End: {End.Value.ToString("yyyy-MM-dd")}" : "");
+  }
 
-  } //end public override string ToString
-
-} //end public class TimesheetEntry
+} //end public class WhosOut

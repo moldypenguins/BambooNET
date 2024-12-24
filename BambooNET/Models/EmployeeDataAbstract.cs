@@ -14,34 +14,48 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name TimesheetEntry.cs
+/// @name EmployeeDataAbstract.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
+
 /// <summary>
-/// TimesheetEntry
+/// EmployeeDataAbstract
 /// </summary>
-public class TimesheetEntry
+public abstract class EmployeeDataAbstract : DataAbstract
 {
-  public int Id { get; set; }
+  //public int Id { get; set; }
+  
+  [JsonProperty("employeeId")]
   public int EmployeeId { get; set; }
-  public string Type { get; set; }
-  public DateTime Date { get; set; }
-  public DateTime? Start { get; set; }
-  public DateTime? End { get; set; }
-  public string? Timezone { get; set; }
-  public float Hours { get; set; }
-  public string? Note { get; set; }
-  public ProjectInfo? ProjectInfo { get; set; }
-  public DateTime? ApprovedAt { get; set; }
-  public bool Approved { get; set; }
+
+  /// <summary>
+  /// Status
+  /// </summary>
+  [JsonProperty("status")]
+  public string Status { get; set; }
+
+  /// <summary>
+  /// FirstName
+  /// </summary>
+  [JsonProperty("firstName")]
+  public string FirstName { get; set; }
+
+  /// <summary>
+  /// LastName
+  /// </summary>
+  [JsonProperty("lastName")]
+  public string LastName { get; set; }
+
+  /// <summary>
+  /// Override base ToString()
+  /// </summary>
+  /// <returns></returns>
   public override string ToString()
   {
-    return $"ID: {Id}, Type: {Type}, EmployeeId: {EmployeeId}, Type: {Type} " +
-      $"Date: {Date:yyyy-MM-dd}, Hours: {Hours}, Note: {Note}, Approved: {Approved} ";
+    return $"Id: {Id}, EmployeeId: {EmployeeId}, Status: {Status}, FirstName: {FirstName}, LastName: {LastName}";
+  }
 
-  } //end public override string ToString
-
-} //end public class TimesheetEntry
+} //end internal class EmployeeDataAbstract : DataAbstract

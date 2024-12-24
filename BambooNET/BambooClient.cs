@@ -18,9 +18,8 @@
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
-using BambooNET.Endpoints;
-using BambooNET.Models;
-using Newtonsoft.Json;
+global using MetaData = (string Name, string Value);
+
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Serializers.NewtonsoftJson;
@@ -36,10 +35,7 @@ public partial class BambooClient
 
   private const string _APIBaseUri = "https://api.bamboohr.com/api/gateway.php";
 
-  private const string _APIVersion = "v1";
-
   private readonly string _CompanySubdomain = string.Empty;
-
 
   /// <summary>
   /// DateFormat
@@ -54,18 +50,19 @@ public partial class BambooClient
   #region Endpoints
 
   /// <summary>
-  /// TimeTracking Endpoint
+  /// Employees Endpoint
   /// </summary>
-  public TimeTracking TimeTracking { get; }
+  public Endpoints.Employees Employees { get; }
 
   /// <summary>
   /// TimeOff Endpoint
   /// </summary>
-  public TimeOff TimeOff { get; }
+  public Endpoints.TimeOff TimeOff { get; }
 
-
-  //TODO: MORE ENDPOINTS
-
+  /// <summary>
+  /// TimeTracking Endpoint
+  /// </summary>
+  public Endpoints.TimeTracking TimeTracking { get; }
 
   #endregion //Endpoints
 
@@ -81,7 +78,7 @@ public partial class BambooClient
     // initialize rest client
     _CompanySubdomain = company_subdomain;
     _RestClient = new RestClient(
-      new RestClientOptions(string.Join("/", [_APIBaseUri, _CompanySubdomain, _APIVersion]))
+      new RestClientOptions($"{_APIBaseUri}/{_CompanySubdomain}")
       {
         Authenticator = new HttpBasicAuthenticator(api_key, "x")
       },
@@ -96,9 +93,10 @@ public partial class BambooClient
     if (date_format != null) { DateFormat = date_format; }
 
     // initialize endpoints
-    TimeTracking = new TimeTracking(this);
-    TimeOff = new TimeOff(this);
-
+    Employees = new(this);
+    TimeOff = new(this);
+    TimeTracking = new(this);
+    
   } //end public BambooClient(string company_subdomain, string api_key)
 
 
@@ -112,7 +110,7 @@ public partial class BambooClient
   /// <param name="parameters">BambooNET.Models.BambooMetadata (Nullable)</param>
   /// <param name="cancellation_token">System.Threading.CancellationToken (Nullable)</param>
   /// <returns></returns>
-  internal async Task<T> ExecuteRequestAsync<T>(Method method, string api_path, BambooMetadata? parameters = null, CancellationToken cancellation_token = default)
+  internal async Task<T> ExecuteRequestAsync<T>(Method method, string api_path, Collection<MetaData>? parameters = null, CancellationToken cancellation_token = default)
   {
     // initialize a rest request
     var request = new RestRequest(api_path, method);
@@ -120,13 +118,9 @@ public partial class BambooClient
     // add parameters
     if (parameters != null && parameters.Count > 0)
     {
-      foreach (var param in parameters)
+      foreach (var (name, value) in parameters)
       {
-        request.AddParameter(
-          param.Name, 
-          (param.Value.GetType() == typeof(DateTime) || param.Value.GetType() == typeof(DateOnly)) ? ((DateOnly)param.Value).ToString(DateFormat) : $"{param.Value}",
-          (method == Method.Put) ? ParameterType.RequestBody : ParameterType.QueryString
-        );
+        request.AddParameter(name, value, ParameterType.GetOrPost);
       }
     }
 

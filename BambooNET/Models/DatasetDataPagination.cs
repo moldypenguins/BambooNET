@@ -14,34 +14,47 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name BambooParameter.cs
+/// @name DatasetDataPagination.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
 /// <summary>
-/// BambooParameter
+/// DatasetDataPagination
 /// </summary>
-/// <param name="type"></param>
-/// <param name="name"></param>
-/// <param name="value"></param>
-public class BambooParameter(Type type, string name, object value)
+public class DatasetDataPagination
 {
   /// <summary>
-  /// Type
+  /// TotalRecords
   /// </summary>
-  public Type Type { get; } = type;
+  [JsonProperty("total_records")]
+  public int TotalRecords { get; set; }
 
   /// <summary>
-  /// Name
+  /// CurrentPage
   /// </summary>
-  public string Name { get; } = name;
+  [JsonProperty("current_page")]
+  public int CurrentPage { get; set; }
 
   /// <summary>
-  /// Value
+  /// TotalPages
   /// </summary>
-  public object Value { get; set; } = value;
+  [JsonProperty("total_pages")]
+  public int TotalPages { get; set; }
+
+  /// <summary>
+  /// NextPage
+  /// </summary>
+  [JsonProperty("next_page")]
+  public int? NextPage { get; set; }
+
+  /// <summary>
+  /// PrevPage
+  /// </summary>
+  [JsonProperty("prev_page")]
+  public int? PrevPage { get; set; }
+
+} //end public class DatasetDataPagination
 
 
-} //end public class BambooParameter(Type type, string name, object value)

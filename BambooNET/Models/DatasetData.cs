@@ -14,34 +14,37 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name TimesheetEntry.cs
+/// @name DatasetData.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
 /// <summary>
-/// TimesheetEntry
+/// DatasetData
 /// </summary>
-public class TimesheetEntry
+/// <typeparam name="T"><see cref="DataAbstract"/></typeparam>
+public class DatasetData<T> where T : DataAbstract
 {
-  public int Id { get; set; }
-  public int EmployeeId { get; set; }
-  public string Type { get; set; }
-  public DateTime Date { get; set; }
-  public DateTime? Start { get; set; }
-  public DateTime? End { get; set; }
-  public string? Timezone { get; set; }
-  public float Hours { get; set; }
-  public string? Note { get; set; }
-  public ProjectInfo? ProjectInfo { get; set; }
-  public DateTime? ApprovedAt { get; set; }
-  public bool Approved { get; set; }
-  public override string ToString()
-  {
-    return $"ID: {Id}, Type: {Type}, EmployeeId: {EmployeeId}, Type: {Type} " +
-      $"Date: {Date:yyyy-MM-dd}, Hours: {Hours}, Note: {Note}, Approved: {Approved} ";
+  /// <summary>
+  /// Data
+  /// </summary>
+  [JsonProperty("data")]
+  public Collection<T> Data { get; set; }
 
-  } //end public override string ToString
+  /// <summary>
+  /// Aggregations
+  /// </summary>
+  [JsonProperty("aggregations")]
+  public string[] Aggregations { get; set; }
 
-} //end public class TimesheetEntry
+  /// <summary>
+  /// Pagination
+  /// </summary>
+  [JsonProperty("pagination")]
+  public DatasetDataPagination Pagination { get; set; }
+
+
+
+
+} //end public abstract class DatasetData<T> where T : EmployeeDataAbstract

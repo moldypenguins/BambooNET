@@ -14,34 +14,20 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name TimesheetEntry.cs
+/// @name EndpointAbstract.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
-namespace BambooNET.Models;
+/// 
+namespace BambooNET.Endpoints;
 
 /// <summary>
-/// TimesheetEntry
+/// EndpointAbstract
 /// </summary>
-public class TimesheetEntry
+/// <param name="bamboo_client"></param>
+public abstract class EndpointAbstract(BambooClient bamboo_client)
 {
-  public int Id { get; set; }
-  public int EmployeeId { get; set; }
-  public string Type { get; set; }
-  public DateTime Date { get; set; }
-  public DateTime? Start { get; set; }
-  public DateTime? End { get; set; }
-  public string? Timezone { get; set; }
-  public float Hours { get; set; }
-  public string? Note { get; set; }
-  public ProjectInfo? ProjectInfo { get; set; }
-  public DateTime? ApprovedAt { get; set; }
-  public bool Approved { get; set; }
-  public override string ToString()
-  {
-    return $"ID: {Id}, Type: {Type}, EmployeeId: {EmployeeId}, Type: {Type} " +
-      $"Date: {Date:yyyy-MM-dd}, Hours: {Hours}, Note: {Note}, Approved: {Approved} ";
+  internal readonly BambooClient _BambooClient = bamboo_client;
 
-  } //end public override string ToString
 
-} //end public class TimesheetEntry
+} //end public class EndpointAbstract(BambooClient bamboo_client)

@@ -14,20 +14,35 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name BambooEndpoint.cs
+/// @name DatasetField.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
-/// 
-namespace BambooNET.Endpoints;
+namespace BambooNET.Models;
 
 /// <summary>
-/// Abstract BambooEndpoint
+/// DatasetField
 /// </summary>
-/// <param name="bamboo_client"></param>
-public abstract class BambooEndpoint(BambooClient bamboo_client)
+public class DatasetField
 {
-  internal readonly BambooClient _BambooClient = bamboo_client;
+  /// <summary>
+  /// Name
+  /// </summary>
+  public string Name { get; set; }
 
+  /// <summary>
+  /// Label
+  /// </summary>
+  public string Label { get; set; }
 
-} //end public class BambooEndpoint(BambooClient bamboo_client)
+  /// <summary>
+  /// ParentType
+  /// </summary>
+  public string ParentType { get; set; }
+
+  /// <summary>
+  /// ParentName
+  /// </summary>
+  public string ParentName { get; set; }
+
+} //end public class DatasetField

@@ -24,41 +24,42 @@ using RestSharp;
 namespace BambooNET.Endpoints;
 
 /// <summary>
-/// Endpoint TimeTracking
+/// TimeTracking Endpoint
 /// </summary>
 /// <param name="bamboo_client"></param>
-public class TimeTracking(BambooClient bamboo_client) : BambooEndpoint(bamboo_client)
+public class TimeTracking(BambooClient bamboo_client) : EndpointAbstract(bamboo_client)
 {
+  //internal readonly BambooClient _BambooClient = bamboo_client;
 
   /// <summary>
-  /// GetTimesheetEntriesAsync
+  /// Get all timesheet entries for a given period of time.
   /// </summary>
   /// <param name="start_date"></param>
   /// <param name="end_date"></param>
   /// <param name="employee_ids"></param>
   /// <returns></returns>
-  public async Task<Collection<TimesheetEntry>> GetTimesheetEntriesAsync(DateOnly start_date, DateOnly end_date, int[]? employee_ids = null)
+  public async Task<Collection<TimesheetEntry>> GetTimesheetEntriesAsync(DateTime start_date, DateTime end_date, int[]? employee_ids = null)
   {
     // set required parameters
-    var meta = new BambooMetadata()
-    {
-      new(typeof(DateOnly), "start", start_date),
-      new(typeof(DateOnly), "end", end_date)
-    };
+    Collection<MetaData> metadata =
+    [
+      new("start", $"{start_date.ToString(_BambooClient.DateFormat)}"),
+      new("end", $"{end_date.ToString(_BambooClient.DateFormat)}")
+    ];
     // set optional parameters
-    if (employee_ids != null) { meta.Add(new(employee_ids.GetType(), "employeeIds", employee_ids)); }
+    if (employee_ids != null) { metadata.Add(new("employeeIds", $"{string.Join(',', employee_ids)}")); }
 
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<Collection<TimesheetEntry>>(Method.Get, "/time_tracking/timesheet_entries/", meta);
+      return await _BambooClient.ExecuteRequestAsync<Collection<TimesheetEntry>>(Method.Get, "/v1/time_tracking/timesheet_entries/", metadata);
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooEndpoint: TimeTracking.GetTimesheetEntriesAsync", ex);
     }
 
-  } //end public async Task<Collection<TimesheetEntry>> GetTimesheetEntriesAsync(DateOnly start_date, DateOnly end_date)
+  } //end public async Task<Collection<TimesheetEntry>> GetTimesheetEntriesAsync
 
 
 } //end public class TimeTracking(BambooClient bamboo_client)

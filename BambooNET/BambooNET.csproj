@@ -11,11 +11,10 @@
     <SignAssembly>False</SignAssembly>
     <ErrorReport>none</ErrorReport>
     <Title>BambooNET</Title>
-    <Authors>Craig Roberts</Authors>
-    <Company>CR Development</Company>
+    <Authors>CRDevelopment</Authors>
     <Product>BambooNET</Product>
     <PackageId>CRDevelopment.BambooNET</PackageId>
-    <Description>This client library enables working with the BambooHR API.</Description>
+    <Description>A .NET client library for the BambooHR API.</Description>
     <Copyright>Copyright © 2024 CR Development</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
@@ -28,6 +27,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>BambooHR.png</PackageIcon>
     <PackageTags>BambooHR</PackageTags>
+    <Company>CRDevelopment</Company>
+    <PackageProjectUrl>https://github.com/moldypenguins/BambooNET</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -41,6 +42,10 @@
 
   <ItemGroup>
     <None Include="..\.github\images\BambooHR.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\.github\images\CRDevelopment.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -61,15 +66,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Newtonsoft.Json" />
     <Using Include="System.Collections.ObjectModel" />
     <Using Include="System.Net" />
     <Using Include="System.Reflection" />
     <Using Include="System.Text" />
     <Using Include="System.Text.RegularExpressions" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Contracts\" />
   </ItemGroup>
 
 </Project>

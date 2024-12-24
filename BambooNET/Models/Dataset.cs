@@ -14,26 +14,25 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name BambooMetadata.cs
+/// @name Dataset.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
 /// <summary>
-/// Collection of <see cref="BambooParameter"/>
+/// Dataset
 /// </summary>
-public class BambooMetadata : Collection<BambooParameter>
+public class Dataset
 {
   /// <summary>
-  /// Constructor
+  /// Name
   /// </summary>
-  public BambooMetadata() : base() { }
+  public string Name { get; set; }
 
   /// <summary>
-  /// Constructor
+  /// Value
   /// </summary>
-  /// <param name="collection"></param>
-  public BambooMetadata(Collection<BambooParameter> collection) : base(collection) { }
+  public string Value { get; set; }
 
-} //end public class BambooMetadata : Collection<Parameter>
+} //end public class Dataset
