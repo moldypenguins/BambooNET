@@ -88,7 +88,7 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
     try
     {
       // set required parameters
-      MetaData metadata = [new("fields", typeof(T).GetPropertiesString())];
+      MetaData metadata = [new("fields", typeof(T).GetPropertiesJson())];
 
       // set optional parameters
       if (sort_by != null) { metadata.Add(new("sortBy", sort_by)); }

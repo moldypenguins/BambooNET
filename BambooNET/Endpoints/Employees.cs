@@ -64,7 +64,7 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   public async Task<T> GetEmployeeDataAsync<T>(int id, bool? only_current = null) where T : EmployeeData
   {
     // set required parameters
-    MetaData metadata = [new("fields", typeof(T).GetPropertiesString())];
+    MetaData metadata = [new("fields", typeof(T).GetPropertiesJson())];
 
     // set optional parameters
     if (only_current != null) { metadata.Add(new("onlyCurrent", $"{only_current.Value.ToString().ToLower()}")); }
