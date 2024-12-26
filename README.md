@@ -62,7 +62,7 @@ try
   var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeData>("employee",
     filters: new DatasetFilters(FiltersMatch.ANY,
     [
-      new DatasetFilter("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString("yyyy-MM-dd"))
+      new DatasetFilter("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString(DATE_FORMAT))
     ]),
     sort_by: new DatasetSortBy() 
     { 
