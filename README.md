@@ -60,12 +60,13 @@ try
   Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
 
   var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeData>("employee",
-    filters: new DatasetFilters(FiltersMatch.ANY,
+    new DatasetFilters(FiltersMatch.ANY,
     [
       new DatasetFilter("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString(DATE_FORMAT))
     ]),
-    sort_by: new DatasetSortBy() 
-    { 
+    new DatasetSortBy() 
+    {
+      new DatasetSortField("hireDate", SortDirection.DESC),
       new DatasetSortField("lastName", SortDirection.ASC),
       new DatasetSortField("firstName", SortDirection.ASC)
     }
