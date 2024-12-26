@@ -28,9 +28,14 @@ namespace BambooNET.Test.Console;
 
 public class Program
 {
+  private static readonly string COMPANY_SUBDOMAIN = "yourcompany";
+  private static readonly string API_KEY = "YourBamb00HRAPIKey";
+  private static readonly string DATE_FORMAT = "yyyy-MM-dd";
+
   private static readonly int BAMBOO_ID = 225;
   private static readonly DateTime START_DATE = new(2024, 11, 30);
   private static readonly DateTime END_DATE = new(2024, 12, 13);
+
 
   public static async Task Main(string[] args)
   {
@@ -38,7 +43,7 @@ public class Program
     {
       System.Console.WriteLine("Running...");
 
-      var bambooClient = new BambooClient("company_subdomain", "api_key");
+      var bambooClient = new BambooClient(COMPANY_SUBDOMAIN, API_KEY, DATE_FORMAT);
 
 
       var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(START_DATE, END_DATE);
@@ -54,20 +59,29 @@ public class Program
 
 
       var employeedata = await bambooClient.Employees.GetEmployeeDataAsync(BAMBOO_ID);
-      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.Count}");
+      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.FirstName} {employeedata.LastName}");
 
 
       var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
       System.Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
 
 
-      //var dataset = await bambooClient.Datasets.GetDatasetData<EmployeeDataAbstract>();
-      //Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
-
-
+      var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeData>("employee",
+        filters: new DatasetFilters(FiltersMatch.ANY,
+        [
+          new DatasetFilter("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString("yyyy-MM-dd"))
+        ]),
+        sort_by: new DatasetSortBy() 
+        { 
+          new DatasetSortField("lastName", SortDirection.ASC),
+          new DatasetSortField("firstName", SortDirection.ASC)
+        }
+      );
+      System.Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
 
 
       System.Console.WriteLine("Done.");
+      System.Console.ReadLine();
     }
     catch (Exception ex)
     {
@@ -82,13 +96,23 @@ public class Program
 } //end public class Program
 
 
+internal class ExtendedEmployeeData : EmployeeData
+{
+  [JsonProperty("customField4664")]
+  public DateTime? HoursPerWeekDate { get; set; }
+
+  [JsonProperty("customField4665")]
+  public float? HoursPerWeek { get; set; }
+}
+
+
 
 internal class JobInfoData : DataAbstract
 {
   //public int Id { get; set; }
 
-  [JsonProperty("employeeId")]
-  public int EmployeeId { get; set; }
+  [JsonProperty("employeeNumber")]
+  public int EmployeeNumber { get; set; }
 
   [JsonProperty("date")]
   public DateTime? Date { get; set; }

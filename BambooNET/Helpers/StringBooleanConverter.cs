@@ -37,10 +37,8 @@ public class StringBooleanConverter : JsonConverter
   /// <param name="value"></param>
   /// <param name="serializer"></param>
   /// <exception cref="NotImplementedException"></exception>
-  public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-  {
-    throw new NotImplementedException();
-  }
+  public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();
+
 
   /// <summary>
   /// 
@@ -53,20 +51,18 @@ public class StringBooleanConverter : JsonConverter
   public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
   {
     var value = reader.Value;
-
     if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
     {
       return false;
     }
-
     string[] truthy = ["yes", "true"];
     if (truthy.Contains(value.ToString()?.ToLower()))
     {
       return true;
     }
-
     return false;
-  }
+
+  } //end public override object ReadJson
 
   /// <summary>
   /// 
@@ -80,6 +76,7 @@ public class StringBooleanConverter : JsonConverter
       return true;
     }
     return false;
-  }
+
+  } //end public override bool CanConvert
 
 } //end public class StringBooleanConverter : JsonConverter

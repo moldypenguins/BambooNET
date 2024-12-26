@@ -33,19 +33,19 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// <summary>
   /// This endpoint gets a list of time off policies.
   /// </summary>
-  /// <param name="bamboo_id"></param>
+  /// <param name="id"></param>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<TimeOffPolicy>> GetTimeOffPoliciesAsync(int bamboo_id)
+  public async Task<Collection<TimeOffPolicy>> GetTimeOffPoliciesAsync(int id)
   {
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<Collection<TimeOffPolicy>>(Method.Get, $"/v1_1/employees/{bamboo_id}/time_off/policies");
+      return await _BambooClient.ExecuteRequestAsync<Collection<TimeOffPolicy>>(Method.Get, $"/v1_1/employees/{id}/time_off/policies");
     }
     catch (Exception ex)
     {
-      throw new Exception($"BambooEndpoint: TimeTracking.GetTimesheetEntriesAsync", ex);
+      throw new Exception($"BambooEndpoint: Employees.GetTimeOffPoliciesAsync", ex);
     }
 
   } //end public async Task<Collection<TimeOffPolicy>> GetTimeOffPoliciesAsync
@@ -56,29 +56,29 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// including current values for fields that are part of a historical table, like job title, or compensation information. 
   /// See the fields endpoint for a list of possible fields.
   /// </summary>
-  /// <param name="bamboo_id"></param>
+  /// <param name="id"></param>
   /// <param name="fields"></param>
   /// <param name="only_current"></param>
-  /// <typeparam name="T"><see cref="EmployeeDataAbstract"/></typeparam>
+  /// <typeparam name="T"><see cref="EmployeeData"/></typeparam>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<T>> GetEmployeeDataAsync<T>(int bamboo_id, string[] fields, bool? only_current = null) where T : EmployeeDataAbstract
+  public async Task<T> GetEmployeeDataAsync<T>(int id, string[] fields, bool? only_current = null) where T : EmployeeData
   {
     // add default fields to requested fields
     var all_fields = string.Join(',', new HashSet<string>(["id", "employeeNumber", "status", "firstName", "lastName", .. fields]));
     // set required parameters
-    Collection<MetaData> metadata = [new("fields", $"{all_fields}")];
+    MetaData metadata = [new("fields", $"{all_fields}")];
     // set optional parameters
     if (only_current != null) { metadata.Add(new("onlyCurrent", $"{only_current.Value.ToString().ToLower()}")); }
 
     // execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<Collection<T>>(Method.Get, $"/v1/employees/{bamboo_id}", metadata);
+      return await _BambooClient.ExecuteRequestAsync<T>(Method.Get, $"/v1/employees/{id}", metadata);
     }
     catch (Exception ex)
     {
-      throw new Exception($"BambooEndpoint: TimeTracking.GetTimesheetEntriesAsync", ex);
+      throw new Exception($"BambooEndpoint: Employees.GetEmployeeDataAsync", ex);
     }
 
   } //end public async Task<Collection<T>> GetEmployeeDataAsync<T>
@@ -89,34 +89,34 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// including current values for fields that are part of a historical table, like job title, or compensation information. 
   /// See the fields endpoint for a list of possible fields.
   /// </summary>
-  /// <param name="bamboo_id"></param>
+  /// <param name="id"></param>
   /// <param name="only_current"></param>
   /// <returns></returns>
-  public async Task<Collection<EmployeeDataAbstract>> GetEmployeeDataAsync(int bamboo_id, bool? only_current = null)
+  public async Task<EmployeeData> GetEmployeeDataAsync(int id, bool? only_current = null)
   {
-    return await GetEmployeeDataAsync<EmployeeDataAbstract>(bamboo_id, [], only_current);
+    return await GetEmployeeDataAsync<EmployeeData>(id, [], only_current);
 
-  } //end public async Task<Collection<EmployeeDataAbstract>> GetEmployeeDataAsync
+  } //end public async Task<EmployeeData> GetEmployeeDataAsync
 
 
   /// <summary>
   /// Returns a data structure representing all the table rows for a given employee and table combination. The result is not sorted in any particular order.
   /// </summary>
-  /// <param name="bamboo_id"></param>
+  /// <param name="id"></param>
   /// <param name="table"></param>
   /// <typeparam name="T"><see cref="DataAbstract"/></typeparam>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<T>> GetTabularDataAsync<T>(int bamboo_id, string table) where T : DataAbstract
+  public async Task<Collection<T>> GetTabularDataAsync<T>(int id, string table) where T : DataAbstract
   {
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<Collection<T>>(Method.Get, $"/v1/employees/{bamboo_id}/tables/{table}");
+      return await _BambooClient.ExecuteRequestAsync<Collection<T>>(Method.Get, $"/v1/employees/{id}/tables/{table}");
     }
     catch (Exception ex)
     {
-      throw new Exception($"BambooEndpoint: TimeTracking.GetTimesheetEntriesAsync", ex);
+      throw new Exception($"BambooEndpoint: Employees.GetTabularDataAsync", ex);
     }
 
   } //end public async Task<Collection<T>> GetTabularDataAsync<T>

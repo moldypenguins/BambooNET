@@ -26,7 +26,7 @@ namespace BambooNET.Models;
 public class TimeOffRequest
 {
   public int Id { get; set; }
-  public int EmployeeId { get; set; }
+  public int EmployeeNumber { get; set; }
   public string Name { get; set; }
   public TimeOffStatus Status { get; set; }
   public DateTime Start { get; set; }
@@ -39,7 +39,7 @@ public class TimeOffRequest
   public TimeOffNotes Notes { get; set; }
   public override string ToString()
   {
-    return $"ID: {Id}, Type: {Type}, EmployeeId: {EmployeeId}, Name: {Name}, Status: {Status} " + 
+    return $"ID: {Id}, Type: {Type}, EmployeeNumber: {EmployeeNumber}, Name: {Name}, Status: {Status} " + 
       $"Start: {Start.ToString("yyyy-MM-dd")}, End: {End.ToString("yyyy-MM-dd")}, Created: {Created.ToString("yyyy-MM-dd")} " + 
       $"Type: {Type}, Amount: {Amount}";
 

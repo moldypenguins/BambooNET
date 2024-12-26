@@ -47,13 +47,13 @@ public class DatasetPagination
   /// NextPage
   /// </summary>
   [JsonProperty("next_page")]
-  public int? NextPage { get; set; }
+  public string? NextPage { get; set; }
 
   /// <summary>
   /// PrevPage
   /// </summary>
   [JsonProperty("prev_page")]
-  public int? PrevPage { get; set; }
+  public string? PrevPage { get; set; }
 
 } //end public class DatasetPagination
 

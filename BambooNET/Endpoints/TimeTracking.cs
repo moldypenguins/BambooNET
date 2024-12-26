@@ -36,18 +36,18 @@ public class TimeTracking(BambooClient bamboo_client) : EndpointAbstract(bamboo_
   /// </summary>
   /// <param name="start_date"></param>
   /// <param name="end_date"></param>
-  /// <param name="employee_ids"></param>
+  /// <param name="employee_numbers"></param>
   /// <returns></returns>
-  public async Task<Collection<TimesheetEntry>> GetTimesheetEntriesAsync(DateTime start_date, DateTime end_date, int[]? employee_ids = null)
+  public async Task<Collection<TimesheetEntry>> GetTimesheetEntriesAsync(DateTime start_date, DateTime end_date, int[]? employee_numbers = null)
   {
     // set required parameters
-    Collection<MetaData> metadata =
+    MetaData metadata =
     [
       new("start", $"{start_date.ToString(_BambooClient.DateFormat)}"),
       new("end", $"{end_date.ToString(_BambooClient.DateFormat)}")
     ];
     // set optional parameters
-    if (employee_ids != null) { metadata.Add(new("employeeIds", $"{string.Join(',', employee_ids)}")); }
+    if (employee_numbers != null) { metadata.Add(new("EmployeeNumbers", $"{string.Join(',', employee_numbers)}")); }
 
     //execute request
     try

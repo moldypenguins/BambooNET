@@ -18,8 +18,7 @@
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
-global using MetaData = (string Name, string Value);
-
+using BambooNET.Models;
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Serializers.NewtonsoftJson;
@@ -119,23 +118,42 @@ public partial class BambooClient
   /// <typeparam name="T"></typeparam>
   /// <param name="method">RestSharp.Method</param>
   /// <param name="api_path">System.String</param>
-  /// <param name="parameters">BambooNET.Models.BambooMetadata (Nullable)</param>
+  /// <param name="meta">BambooNET.Models.BambooMetadata (Nullable)</param>
   /// <param name="cancellation_token">System.Threading.CancellationToken (Nullable)</param>
   /// <returns></returns>
-  internal async Task<T> ExecuteRequestAsync<T>(Method method, string api_path, Collection<MetaData>? parameters = null, CancellationToken cancellation_token = default)
+  internal async Task<T> ExecuteRequestAsync<T>(Method method, string api_path, MetaData? meta = null, CancellationToken cancellation_token = default)
   {
     // initialize a rest request
     var request = new RestRequest(api_path, method);
-
     // add parameters
-    if (parameters != null && parameters.Count > 0)
+    if (meta != null && meta.Count > 0)
     {
-      foreach (var (name, value) in parameters)
+      switch (method)
       {
-        request.AddParameter(name, value, ParameterType.GetOrPost);
+        case Method.Get:
+          // add to querystring
+          foreach (var m in meta)
+          {
+            request.AddParameter(m.Name, m.Value, ParameterType.QueryString);
+          }
+          break;
+        case Method.Post:
+        case Method.Put:
+          // add to request body
+          Dictionary<string, object> obj = [];
+          foreach (var m in meta)
+          {
+            obj.Add(m.Name, m.Value);
+          }
+          request.AddBody(JsonConvert.SerializeObject(obj));
+          break;
+        case Method.Delete:
+          // no parameters
+          break;
+        default:
+          throw new NotImplementedException();
       }
     }
-
     // execute the rest request
     RestResponse response;
     try
@@ -146,21 +164,18 @@ public partial class BambooClient
     {
       throw new Exception($"Error executing BambooHR API request to {api_path}", ex);
     }
-
     if (response.ErrorException != null)
     {
       throw new Exception($"Error executing BambooHR API request to {api_path}", response.ErrorException);
     }
-
     if (response.Content == null || response.Content.Replace("[]", string.Empty) == string.Empty)
     {
       throw new Exception($"Empty BambooHR API response from BambooHR API request to {api_path}. HTTP Status Code {response.StatusCode}");
     }
-
     else if (response.StatusCode == HttpStatusCode.OK)
     {
       // replace null dates
-      var sanitized = response.Content.Replace($"Date\":\"{NumbersLetters().Replace(DateFormat, "0")}\"", "Date\":null");
+      var sanitized = response.Content.Replace($"\"{NumbersLetters().Replace(DateFormat, "0")}\"", "null");
 
       // deserialize data
       var package = JsonConvert.DeserializeObject<T>(sanitized);

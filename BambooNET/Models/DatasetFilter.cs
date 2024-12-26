@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using BambooNET.Helpers;
+
+/// <summary>
 /// BambooNET
 /// Copyright(c) 2024 CR Development
 /// 
@@ -14,25 +16,68 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name Dataset.cs
+/// @name DatasetFilter.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
 /// <summary>
-/// Dataset
+/// DatasetFilter
 /// </summary>
-public class Dataset(string name, string value)
+/// <param name="field"></param>
+/// <param name="filter_operator"></param>
+/// <param name="value"></param>
+public class DatasetFilter
 {
   /// <summary>
-  /// Name
+  /// 
   /// </summary>
-  public string Name { get; set; } = name;
+  [JsonProperty("field")]
+  public string Field { get; set; }
 
   /// <summary>
-  /// Value
+  /// 
   /// </summary>
-  public string Value { get; set; } = value;
+  [JsonProperty("operator")]
+  [JsonConverter(typeof(EnumStringConverter))]
+  public FilterOperator Operator { get; set; }
 
-} //end public class Dataset
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("value")]
+  public object Value { get; set; }
+
+
+  /// <summary>
+  /// Constructor
+  /// </summary>
+  /// <param name="field"></param>
+  /// <param name="filter_operator"></param>
+  /// <param name="value"></param>
+  public DatasetFilter(string field, FilterOperator filter_operator, string[] value) 
+  { 
+    Field = field;
+    Operator = filter_operator;
+    Value = value;
+
+  } //end public DatasetFilter
+
+
+  /// <summary>
+  /// Constructor
+  /// </summary>
+  /// <param name="field"></param>
+  /// <param name="filter_operator"></param>
+  /// <param name="value"></param>
+  public DatasetFilter(string field, FilterOperator filter_operator, string value) 
+  {
+    Field = field;
+    Operator = filter_operator;
+    Value = value;
+
+  } //end public DatasetFilter
+
+
+} //end public class DatasetFilter

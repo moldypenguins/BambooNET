@@ -14,25 +14,13 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name Dataset.cs
+/// @name MetaData.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
 /// <summary>
-/// Dataset
+/// MetaData
 /// </summary>
-public class Dataset(string name, string value)
-{
-  /// <summary>
-  /// Name
-  /// </summary>
-  public string Name { get; set; } = name;
-
-  /// <summary>
-  /// Value
-  /// </summary>
-  public string Value { get; set; } = value;
-
-} //end public class Dataset
+public class MetaData : Collection<MetaParameter> { } //end public class MetaData : Collection<MetaParameter>

@@ -28,7 +28,6 @@ public partial class StringFloatConverter : JsonConverter
   [GeneratedRegex("[^0-9.,]")]
   private static partial Regex StringFloatRegex();
 
-
   /// <summary>
   /// 
   /// </summary>
@@ -41,10 +40,8 @@ public partial class StringFloatConverter : JsonConverter
   /// <param name="value"></param>
   /// <param name="serializer"></param>
   /// <exception cref="NotImplementedException"></exception>
-  public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
-  {
-    throw new NotImplementedException();
-  }
+  public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer) => throw new NotImplementedException();
+
 
   /// <summary>
   /// 
@@ -66,7 +63,8 @@ public partial class StringFloatConverter : JsonConverter
     var success = float.TryParse(regex.Replace(value, "").Trim(), out var result);
     return success ? result : null;
 
-  }
+  } //end public override object? ReadJson
+
 
   /// <summary>
   /// 
@@ -80,6 +78,7 @@ public partial class StringFloatConverter : JsonConverter
       return true;
     }
     return false;
-  }
+
+  } //end public override bool CanConvert
 
 } //end public partial class StringFloatConverter : JsonConverter

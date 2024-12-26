@@ -38,25 +38,25 @@ public class TimeOff(BambooClient bamboo_client) : EndpointAbstract(bamboo_clien
   /// </summary>
   /// <param name="start_date"></param>
   /// <param name="end_date"></param>
-  /// <param name="bamboo_id"></param>
+  /// <param name="id"></param>
   /// <param name="action"></param>
-  /// <param name="employee_id"></param>
+  /// <param name="employee_number"></param>
   /// <param name="types"></param>
   /// <param name="statuses"></param>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<TimeOffRequest>> GetRequestsAsync(DateTime start_date, DateTime end_date, int? bamboo_id = null, string? action = null, int? employee_id = null, int[]? types = null, string[]? statuses = null)
+  public async Task<Collection<TimeOffRequest>> GetRequestsAsync(DateTime start_date, DateTime end_date, int? id = null, string? action = null, int? employee_number = null, int[]? types = null, string[]? statuses = null)
   {
     // set required parameters
-    Collection<MetaData> metadata = 
+    MetaData metadata = 
     [
       new("start", $"{start_date.ToString(_BambooClient.DateFormat)}"),
       new("end", $"{end_date.ToString(_BambooClient.DateFormat)}")
     ];
     // set optional parameters
-    if (bamboo_id != null) { metadata.Add(new("id", $"{bamboo_id}")); }
+    if (id != null) { metadata.Add(new("id", $"{id}")); }
     if (action != null) { metadata.Add(new("id", $"{action}")); }
-    if (employee_id != null) { metadata.Add(new("employeeId", $"{employee_id}")); }
+    if (employee_number != null) { metadata.Add(new("employeeNumber", $"{employee_number}")); }
     if (types != null) { metadata.Add(new("type", $"{types}")); }
     if (statuses != null) { metadata.Add(new("status", $"{statuses}")); }
 
@@ -82,7 +82,7 @@ public class TimeOff(BambooClient bamboo_client) : EndpointAbstract(bamboo_clien
   public async Task<Collection<WhosOut>> GetWhosOutAsync(DateTime? start_date = null, DateTime? end_date = null)
   {
     // set required parameters
-    Collection<MetaData> metadata = [];
+    MetaData metadata = [];
     // set optional parameters
     if (start_date != null) { metadata.Add(new("start", $"{start_date.Value.ToString(_BambooClient.DateFormat)}")); }
     if (end_date != null) { metadata.Add(new("end", $"{end_date.Value.ToString(_BambooClient.DateFormat)}")); }

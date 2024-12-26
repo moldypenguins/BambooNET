@@ -36,7 +36,7 @@ public class WhosOut
   /// <summary>
   /// 
   /// </summary>
-  public string EmployeeId { get; set; }
+  public string EmployeeNumber { get; set; }
   /// <summary>
   /// 
   /// </summary>
@@ -66,7 +66,7 @@ public class WhosOut
   /// <returns></returns>
   public override string ToString()
   {
-    return $"ID: {Id}, Type: {Type}, EmployeeId: {EmployeeId}, Name: {Name}" + 
+    return $"ID: {Id}, Type: {Type}, EmployeeNumber: {EmployeeNumber}, Name: {Name}" + 
       (Start.HasValue ? $", Start: {Start.Value.ToString("yyyy-MM-dd")}" : "") +
       (End.HasValue ? $", End: {End.Value.ToString("yyyy-MM-dd")}" : "");
   }

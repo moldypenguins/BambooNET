@@ -1,4 +1,6 @@
-﻿/// <summary>
+﻿using BambooNET.Helpers;
+
+/// <summary>
 /// BambooNET
 /// Copyright(c) 2024 CR Development
 /// 
@@ -14,25 +16,28 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name Dataset.cs
+/// @name DatasetSortField.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
 namespace BambooNET.Models;
 
 /// <summary>
-/// Dataset
+/// DatasetSortField
 /// </summary>
-public class Dataset(string name, string value)
+public class DatasetSortField(string field, SortDirection sort)
 {
   /// <summary>
-  /// Name
+  /// Field
   /// </summary>
-  public string Name { get; set; } = name;
+  [JsonProperty("field")]
+  public string Field { get; set; } = field;
 
   /// <summary>
-  /// Value
+  /// Sort
   /// </summary>
-  public string Value { get; set; } = value;
+  [JsonProperty("sort")]
+  [JsonConverter(typeof(EnumStringConverter))]
+  public SortDirection Sort { get; set; } = sort;
 
-} //end public class Dataset
+} //end public class DatasetSortField

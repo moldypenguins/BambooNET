@@ -14,25 +14,32 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name Dataset.cs
+/// @name DatasetFilters.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
+using System;
+using BambooNET.Helpers;
+
 namespace BambooNET.Models;
 
 /// <summary>
-/// Dataset
+/// DatasetFilters
 /// </summary>
-public class Dataset(string name, string value)
+public class DatasetFilters(FiltersMatch match, Collection<DatasetFilter> filters)
 {
   /// <summary>
-  /// Name
+  /// 
   /// </summary>
-  public string Name { get; set; } = name;
+  [JsonProperty("match")]
+  [JsonConverter(typeof(EnumStringConverter))]
+  public FiltersMatch Match { get; set; } = match;
 
   /// <summary>
-  /// Value
+  /// 
   /// </summary>
-  public string Value { get; set; } = value;
+  [JsonProperty("filters")]
+  public Collection<DatasetFilter> Filters { get; set; } = filters;
 
-} //end public class Dataset
+
+} //end public class DatasetFilters

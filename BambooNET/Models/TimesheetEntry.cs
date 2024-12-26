@@ -26,7 +26,7 @@ namespace BambooNET.Models;
 public class TimesheetEntry
 {
   public int Id { get; set; }
-  public int EmployeeId { get; set; }
+  public int EmployeeNumber { get; set; }
   public string Type { get; set; }
   public DateTime Date { get; set; }
   public DateTime? Start { get; set; }
@@ -39,7 +39,7 @@ public class TimesheetEntry
   public bool Approved { get; set; }
   public override string ToString()
   {
-    return $"ID: {Id}, Type: {Type}, EmployeeId: {EmployeeId}, Type: {Type} " +
+    return $"ID: {Id}, Type: {Type}, EmployeeNumber: {EmployeeNumber}, Type: {Type} " +
       $"Date: {Date:yyyy-MM-dd}, Hours: {Hours}, Note: {Note}, Approved: {Approved} ";
 
   } //end public override string ToString
