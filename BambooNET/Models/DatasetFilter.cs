@@ -25,9 +25,6 @@ namespace BambooNET.Models;
 /// <summary>
 /// DatasetFilter
 /// </summary>
-/// <param name="field"></param>
-/// <param name="filter_operator"></param>
-/// <param name="value"></param>
 public class DatasetFilter
 {
   /// <summary>

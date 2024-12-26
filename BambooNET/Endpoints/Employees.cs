@@ -36,19 +36,19 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// <param name="id"></param>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<TimeOffPolicy>> GetTimeOffPoliciesAsync(int id)
+  public async Task<List<TimeOffPolicy>> GetTimeOffPoliciesAsync(int id)
   {
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<Collection<TimeOffPolicy>>(Method.Get, $"/v1_1/employees/{id}/time_off/policies");
+      return await _BambooClient.ExecuteRequestAsync<List<TimeOffPolicy>>(Method.Get, $"/v1_1/employees/{id}/time_off/policies");
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooEndpoint: Employees.GetTimeOffPoliciesAsync", ex);
     }
 
-  } //end public async Task<Collection<TimeOffPolicy>> GetTimeOffPoliciesAsync
+  } //end public async Task<List<TimeOffPolicy>> GetTimeOffPoliciesAsync
 
 
   /// <summary>
@@ -57,17 +57,14 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// See the fields endpoint for a list of possible fields.
   /// </summary>
   /// <param name="id"></param>
-  /// <param name="fields"></param>
   /// <param name="only_current"></param>
   /// <typeparam name="T"><see cref="EmployeeData"/></typeparam>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<T> GetEmployeeDataAsync<T>(int id, string[] fields, bool? only_current = null) where T : EmployeeData
+  public async Task<T> GetEmployeeDataAsync<T>(int id, bool? only_current = null) where T : EmployeeData
   {
-    // add default fields to requested fields
-    var all_fields = string.Join(',', new HashSet<string>(["id", "employeeNumber", "status", "firstName", "lastName", .. fields]));
     // set required parameters
-    MetaData metadata = [new("fields", $"{all_fields}")];
+    MetaData metadata = [new("fields", string.Join(',', typeof(T).GetJsonFields()))];
     // set optional parameters
     if (only_current != null) { metadata.Add(new("onlyCurrent", $"{only_current.Value.ToString().ToLower()}")); }
 
@@ -81,7 +78,7 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
       throw new Exception($"BambooEndpoint: Employees.GetEmployeeDataAsync", ex);
     }
 
-  } //end public async Task<Collection<T>> GetEmployeeDataAsync<T>
+  } //end public async Task<List<T>> GetEmployeeDataAsync<T>
   
 
   /// <summary>
@@ -94,7 +91,7 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// <returns></returns>
   public async Task<EmployeeData> GetEmployeeDataAsync(int id, bool? only_current = null)
   {
-    return await GetEmployeeDataAsync<EmployeeData>(id, [], only_current);
+    return await GetEmployeeDataAsync<EmployeeData>(id, only_current);
 
   } //end public async Task<EmployeeData> GetEmployeeDataAsync
 
@@ -107,19 +104,19 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// <typeparam name="T"><see cref="DataAbstract"/></typeparam>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<T>> GetTabularDataAsync<T>(int id, string table) where T : DataAbstract
+  public async Task<List<T>> GetTabularDataAsync<T>(int id, string table) where T : DataAbstract
   {
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<Collection<T>>(Method.Get, $"/v1/employees/{id}/tables/{table}");
+      return await _BambooClient.ExecuteRequestAsync<List<T>>(Method.Get, $"/v1/employees/{id}/tables/{table}");
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooEndpoint: Employees.GetTabularDataAsync", ex);
     }
 
-  } //end public async Task<Collection<T>> GetTabularDataAsync<T>
+  } //end public async Task<List<T>> GetTabularDataAsync<T>
 
 
 } //end public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_client)

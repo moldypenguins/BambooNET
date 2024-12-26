@@ -26,7 +26,7 @@ namespace BambooNET.Models;
 /// <summary>
 /// DatasetFilters
 /// </summary>
-public class DatasetFilters(FiltersMatch match, Collection<DatasetFilter> filters)
+public class DatasetFilters(FiltersMatch match, List<DatasetFilter> filters)
 {
   /// <summary>
   /// 
@@ -39,7 +39,7 @@ public class DatasetFilters(FiltersMatch match, Collection<DatasetFilter> filter
   /// 
   /// </summary>
   [JsonProperty("filters")]
-  public Collection<DatasetFilter> Filters { get; set; } = filters;
+  public List<DatasetFilter> Filters { get; set; } = filters;
 
 
 } //end public class DatasetFilters

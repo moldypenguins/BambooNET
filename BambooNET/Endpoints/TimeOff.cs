@@ -45,7 +45,7 @@ public class TimeOff(BambooClient bamboo_client) : EndpointAbstract(bamboo_clien
   /// <param name="statuses"></param>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<TimeOffRequest>> GetRequestsAsync(DateTime start_date, DateTime end_date, int? id = null, string? action = null, int? employee_number = null, int[]? types = null, string[]? statuses = null)
+  public async Task<List<TimeOffRequest>> GetRequestsAsync(DateTime start_date, DateTime end_date, int? id = null, string? action = null, int? employee_number = null, int[]? types = null, string[]? statuses = null)
   {
     // set required parameters
     MetaData metadata = 
@@ -62,14 +62,14 @@ public class TimeOff(BambooClient bamboo_client) : EndpointAbstract(bamboo_clien
 
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<Collection<TimeOffRequest>>(Method.Get, "/v1/time_off/requests/", metadata);
+      return await _BambooClient.ExecuteRequestAsync<List<TimeOffRequest>>(Method.Get, "/v1/time_off/requests/", metadata);
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooEndpoint: TimeOff.GetRequestsAsync", ex);
     }
 
-  } //end public async Task<Collection<TimeOffRequest>> GetRequestsAsync
+  } //end public async Task<List<TimeOffRequest>> GetRequestsAsync
 
 
   /// <summary>
@@ -79,7 +79,7 @@ public class TimeOff(BambooClient bamboo_client) : EndpointAbstract(bamboo_clien
   /// <param name="end_date">defaults to 14 days from the start date.</param>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<WhosOut>> GetWhosOutAsync(DateTime? start_date = null, DateTime? end_date = null)
+  public async Task<List<WhosOut>> GetWhosOutAsync(DateTime? start_date = null, DateTime? end_date = null)
   {
     // set required parameters
     MetaData metadata = [];
@@ -89,14 +89,14 @@ public class TimeOff(BambooClient bamboo_client) : EndpointAbstract(bamboo_clien
 
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<Collection<WhosOut>>(Method.Get, "/v1/time_off/whos_out/", metadata);
+      return await _BambooClient.ExecuteRequestAsync<List<WhosOut>>(Method.Get, "/v1/time_off/whos_out/", metadata);
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooEndpoint: TimeOff.GetWhosOutAsync", ex);
     }
 
-  } //end public async Task<Collection<WhosOut>> GetWhosOutAsync
+  } //end public async Task<List<WhosOut>> GetWhosOutAsync
 
 
 

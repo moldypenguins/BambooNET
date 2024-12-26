@@ -1,4 +1,7 @@
-﻿/// <summary>
+﻿using BambooNET.Models;
+using RestSharp.Extensions;
+
+/// <summary>
 /// BambooNET
 /// Copyright(c) 2024 CR Development
 /// 
@@ -26,6 +29,39 @@ namespace BambooNET;
 public static class Extensions
 {
   /// <summary>
+  /// Extends System.Type
+  /// </summary>
+  /// <param name="type"></param>
+  /// <returns></returns>
+  public static List<string> GetJsonFields(this Type type)
+  {
+    // ensure properties can be found
+    var properties = type.GetProperties();
+    if (properties == null || properties.Length <= 0)
+    {
+      throw new Exception($"Unable to find properties of type {type}");
+    }
+    // add properties of T to fields
+    var fields = properties.Select(f =>
+    {
+      var j = f.GetAttribute<JsonPropertyAttribute>();
+      return (j != null) ? $"{j.PropertyName}" : $"{f.Name}";
+    }).ToList();
+    if (fields == null || fields.Count <= 0)
+    {
+      throw new Exception($"Unable to find properties of type {type}");
+    }
+    return fields;
+
+  } //end public static List<string> GetJsonFields
+
+
+
+
+
+
+
+  /// <summary>
   /// Extends System.Uri - parses the query string into a dictionary
   /// </summary>
   /// <param name="uri"></param>
@@ -47,9 +83,6 @@ public static class Extensions
   } //end public static Dictionary<string, string> ParseQueryString(this Uri uri)
 
 
-
-
-
   /// <summary>
   /// Extends BambooNET.SortDirection
   /// </summary>
@@ -66,8 +99,6 @@ public static class Extensions
     };
 
   } //end public static string GetString(this FiltersMatch match)
-
-
 
 
   /// <summary>
@@ -119,6 +150,5 @@ public static class Extensions
     };
 
   } //end public static string GetString(this FilterOperator filterOperator)
-
 
 } //end public static class Extensions
