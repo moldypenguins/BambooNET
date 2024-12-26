@@ -32,9 +32,8 @@
 
 ## Usage  
 ```csharp
-private static readonly string COMPANY_SUBDOMAIN = "yourcompany";
-private static readonly string API_KEY = "YourBamb00HRAPIKey";
-private static readonly string DATE_FORMAT = "yyyy-MM-dd";
+static readonly string COMPANY_SUBDOMAIN = "yourcompany";
+static readonly string API_KEY = "YourBamb00HRAPIKey";
 
 static readonly int BAMBOO_ID = 123;
 static readonly DateTime START_DATE = new(2024, 11, 30);
@@ -42,7 +41,7 @@ static readonly DateTime END_DATE = new(2024, 12, 13);
 
 try
 {
-  var bambooClient = new BambooClient("company_subdomain", "api_key");
+  var bambooClient = new BambooClient(COMPANY_SUBDOMAIN, API_KEY);
 
   var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(START_DATE, END_DATE);
   Console.WriteLine($"TimeTracking.GetTimesheetEntriesAsync Results: {timesheets.Count}");
@@ -54,25 +53,26 @@ try
   Console.WriteLine($"TimeOff.GetWhosOutAsync Results: {whosout.Count}");
 
   var employeedata = await bambooClient.Employees.GetEmployeeDataAsync(BAMBOO_ID);
-  Console.WriteLine($"Employees.GetTabularDataAsync Results: {employeedata.Count}");
+  Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.FirstName} {employeedata.LastName}");
+
+  var ex_employeedata = await bambooClient.Employees.GetEmployeeDataAsync<ExtendedEmployeeData>(BAMBOO_ID);
+  Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {ex_employeedata.FirstName} {ex_employeedata.LastName}, Hours: {ex_employeedata.HoursPerWeek}");
 
   var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
   Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
 
   var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeData>("employee",
-    new DatasetFilters(FiltersMatch.ANY,
+    new(FiltersMatch.ANY,
     [
-      new DatasetFilter("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString(DATE_FORMAT))
+      new("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString(bambooClient.DateFormat))
     ]),
-    new DatasetSortBy() 
-    {
-      new DatasetSortField("hireDate", SortDirection.DESC),
-      new DatasetSortField("lastName", SortDirection.ASC),
-      new DatasetSortField("firstName", SortDirection.ASC)
-    }
+    [
+      new("hireDate", SortDirection.DESC),
+      new("lastName", SortDirection.ASC),
+      new("firstName", SortDirection.ASC)
+    ]
   );
-  System.Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
-
+  Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
 }
 catch (Exception ex)
 {
