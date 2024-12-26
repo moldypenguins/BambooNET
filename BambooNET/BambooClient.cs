@@ -43,7 +43,7 @@ public partial class BambooClient
   /// DateFormat
   /// Default: "yyyy-MM-dd"
   /// </summary>
-  internal string DateFormat { get; private set; } = "yyyy-MM-dd";
+  public string DateFormat { get; private set; } = "yyyy-MM-dd";
 
   /// <summary>
   /// Regex for number and letter characters
