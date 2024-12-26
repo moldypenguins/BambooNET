@@ -33,7 +33,7 @@ public static class Extensions
   /// </summary>
   /// <param name="type"></param>
   /// <returns></returns>
-  public static List<string> GetJsonFields(this Type type)
+  public static string GetPropertiesString(this Type type)
   {
     // ensure properties can be found
     var properties = type.GetProperties();
@@ -42,23 +42,16 @@ public static class Extensions
       throw new Exception($"Unable to find properties of type {type}");
     }
     // add properties of T to fields
-    var fields = properties.Select(f =>
-    {
-      var j = f.GetAttribute<JsonPropertyAttribute>();
-      return (j != null) ? $"{j.PropertyName}" : $"{f.Name}";
-    }).ToList();
-    if (fields == null || fields.Count <= 0)
-    {
-      throw new Exception($"Unable to find properties of type {type}");
-    }
-    return fields;
+    var fields = string.Join(',', 
+      properties.Select(f =>
+      {
+        var j = f.GetAttribute<JsonPropertyAttribute>();
+        return (j != null) ? $"{j.PropertyName}" : $"{f.Name}";
+      })
+    ) ?? throw new Exception($"Unable to find properties of type {type}");
+    return $"{fields}";
 
-  } //end public static List<string> GetJsonFields
-
-
-
-
-
+  } //end public static string GetPropertiesString
 
 
   /// <summary>

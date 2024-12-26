@@ -23,4 +23,4 @@ namespace BambooNET.Models;
 /// <summary>
 /// DatasetSortBy
 /// </summary>
-public class DatasetSortBy : List<DatasetSortField> { } //end public class DatasetSortBy
+public class DatasetSortBy : Collection<DatasetSortField> { } //end public class DatasetSortBy

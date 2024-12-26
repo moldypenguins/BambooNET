@@ -42,19 +42,19 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
   /// </summary>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<List<Dataset>> GetDatasetsAsync()
+  public async Task<Collection<Dataset>> GetDatasetsAsync()
   {
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<List<Dataset>>(Method.Get, $"/v1/datasets");
+      return await _BambooClient.ExecuteRequestAsync<Collection<Dataset>>(Method.Get, $"/v1/datasets");
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooNET.Endpoints.Datasets.GetDataSetsAsync", ex);
     }
 
-  } //end public async Task<List<Dataset>> GetDataSetsAsync
+  } //end public async Task<Collection<Dataset>> GetDataSetsAsync
 
 
   /// <summary>
@@ -63,19 +63,19 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
   /// <param name="dataset_name"></param>
   /// <returns>A collection of <see cref="DatasetField"/></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<List<DatasetField>> GetDatasetFieldsAsync(string dataset_name)
+  public async Task<Collection<DatasetField>> GetDatasetFieldsAsync(string dataset_name)
   {
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<List<DatasetField>>(Method.Get, $"/v1/datasets/{dataset_name}/fields");
+      return await _BambooClient.ExecuteRequestAsync<Collection<DatasetField>>(Method.Get, $"/v1/datasets/{dataset_name}/fields");
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooNET.Endpoints.Datasets.GetDataSetsAsync", ex);
     }
 
-  } //end public async Task<List<DatasetField>> GetDataSetFieldsAsync
+  } //end public async Task<Collection<DatasetField>> GetDataSetFieldsAsync
 
 
   /// <summary>
@@ -83,13 +83,12 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
   /// </summary>
   /// <typeparam name="T"></typeparam>
   /// <returns></returns>
-  public async Task<List<T>> GetDatasetDataAsync<T>(string dataset_name, DatasetFilters? filters = null, DatasetSortBy? sort_by = null) where T : DataAbstract
+  public async Task<Collection<T>> GetDatasetDataAsync<T>(string dataset_name, DatasetFilters? filters = null, DatasetSortBy? sort_by = null) where T : DataAbstract
   {
     try
     {
       // set required parameters
-      MetaData metadata = [];
-      metadata.Add(new("fields", string.Join(',', typeof(T).GetJsonFields())));
+      MetaData metadata = [new("fields", typeof(T).GetPropertiesString())];
 
       // set optional parameters
       if (sort_by != null) { metadata.Add(new("sortBy", sort_by)); }
@@ -100,7 +99,7 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
 
       if (filters != null) { metadata.Add(new("filters", filters)); }
 
-      List<T> data = [];
+      Collection<T> data = [];
       DatasetData<T>? query = null;
       while (query == null || query.Pagination.CurrentPage < query.Pagination.TotalPages)
       {

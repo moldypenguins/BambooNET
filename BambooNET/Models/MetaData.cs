@@ -23,4 +23,4 @@ namespace BambooNET.Models;
 /// <summary>
 /// MetaData
 /// </summary>
-public class MetaData : List<MetaParameter> { } //end public class MetaData : List<MetaParameter>
+public class MetaData : Collection<MetaParameter> { } //end public class MetaData : Collection<MetaParameter>

@@ -38,7 +38,7 @@ public class TimeTracking(BambooClient bamboo_client) : EndpointAbstract(bamboo_
   /// <param name="end_date"></param>
   /// <param name="employee_numbers"></param>
   /// <returns></returns>
-  public async Task<List<TimesheetEntry>> GetTimesheetEntriesAsync(DateTime start_date, DateTime end_date, int[]? employee_numbers = null)
+  public async Task<Collection<TimesheetEntry>> GetTimesheetEntriesAsync(DateTime start_date, DateTime end_date, int[]? employee_numbers = null)
   {
     // set required parameters
     MetaData metadata =
@@ -52,14 +52,14 @@ public class TimeTracking(BambooClient bamboo_client) : EndpointAbstract(bamboo_
     //execute request
     try
     {
-      return await _BambooClient.ExecuteRequestAsync<List<TimesheetEntry>>(Method.Get, "/v1/time_tracking/timesheet_entries/", metadata);
+      return await _BambooClient.ExecuteRequestAsync<Collection<TimesheetEntry>>(Method.Get, "/v1/time_tracking/timesheet_entries/", metadata);
     }
     catch (Exception ex)
     {
       throw new Exception($"BambooEndpoint: TimeTracking.GetTimesheetEntriesAsync", ex);
     }
 
-  } //end public async Task<List<TimesheetEntry>> GetTimesheetEntriesAsync
+  } //end public async Task<Collection<TimesheetEntry>> GetTimesheetEntriesAsync
 
 
 } //end public class TimeTracking(BambooClient bamboo_client)
