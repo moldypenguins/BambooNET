@@ -168,7 +168,7 @@ public partial class BambooClient
     {
       throw new Exception($"Error executing BambooHR API request to {api_path}", response.ErrorException);
     }
-    if (response.Content == null || response.Content.Replace("[]", string.Empty) == string.Empty)
+    if (response.Content == null || (response.Content.Replace("[]", string.Empty) == string.Empty && response.StatusCode != HttpStatusCode.OK))
     {
       throw new Exception($"Empty BambooHR API response from BambooHR API request to {api_path}. HTTP Status Code {response.StatusCode}");
     }
