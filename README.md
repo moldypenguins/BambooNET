@@ -32,6 +32,10 @@
 
 ## Usage  
 ```csharp
+private static readonly string COMPANY_SUBDOMAIN = "yourcompany";
+private static readonly string API_KEY = "YourBamb00HRAPIKey";
+private static readonly string DATE_FORMAT = "yyyy-MM-dd";
+
 static readonly int BAMBOO_ID = 123;
 static readonly DateTime START_DATE = new(2024, 11, 30);
 static readonly DateTime END_DATE = new(2024, 12, 13);
@@ -54,6 +58,19 @@ try
 
   var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
   Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
+
+  var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeData>("employee",
+    filters: new DatasetFilters(FiltersMatch.ANY,
+    [
+      new DatasetFilter("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString("yyyy-MM-dd"))
+    ]),
+    sort_by: new DatasetSortBy() 
+    { 
+      new DatasetSortField("lastName", SortDirection.ASC),
+      new DatasetSortField("firstName", SortDirection.ASC)
+    }
+  );
+  System.Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
 
 }
 catch (Exception ex)
