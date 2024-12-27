@@ -20,7 +20,6 @@
 /// </summary>
 namespace BambooNET.Models;
 
-
 /// <summary>
 /// EmployeeData
 /// </summary>
@@ -34,13 +33,11 @@ public class EmployeeData : DataAbstract
   [JsonProperty("employeeNumber")]
   public int? EmployeeNumber { get; set; }
 
-
   /// <summary>
   /// Status
   /// </summary>
   [JsonProperty("status")]
   public string Status { get; set; } = string.Empty;
-
 
   /// <summary>
   /// FirstName
@@ -48,13 +45,11 @@ public class EmployeeData : DataAbstract
   [JsonProperty("firstName")]
   public string FirstName { get; set; } = string.Empty;
 
-
   /// <summary>
   /// LastName
   /// </summary>
   [JsonProperty("lastName")]
   public string LastName { get; set; } = string.Empty;
-
 
   /// <summary>
   /// Override base ToString()
@@ -64,6 +59,5 @@ public class EmployeeData : DataAbstract
   {
     return $"Id: {Id}, EmployeeNumber: {EmployeeNumber}, Status: {Status}, FirstName: {FirstName}, LastName: {LastName}";
   }
-
 
 } //end internal class EmployeeData : DataAbstract

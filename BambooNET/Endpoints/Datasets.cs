@@ -82,22 +82,18 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
     try
     {
       // set required parameters
-      var metadata = new MetaData() { { "fields", typeof(T).GetPropertiesJson(true) } };
+      var metadata = new MetaData() { { "fields", typeof(T).GetPropertiesJson() } };
 
       // set optional parameters
       if (sort_by != null) { metadata.Add("sortBy", sort_by); }
-
-      // groupBy
-
-      // aggregations
-
+      // if (group_by != null) { metadata.Add("groupBy", group_by); }
+      // if (aggregations != null) { metadata.Add("aggregations", aggregations); }
       if (filters != null) { metadata.Add("filters", filters); }
 
       Collection<T> data = [];
       DatasetData<T>? query = null;
       while (query == null || query.Pagination.CurrentPage < query.Pagination.TotalPages)
       {
-
         // pagination
         if (query?.Pagination.NextPage != null) 
         {

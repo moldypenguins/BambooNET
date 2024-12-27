@@ -18,6 +18,7 @@
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
+using BambooNET.Models;
 using RestSharp.Extensions;
 
 namespace BambooNET;
@@ -31,9 +32,8 @@ public static class Extensions
   /// Extends System.Type
   /// </summary>
   /// <param name="type"></param>
-  /// <param name="exclude_id"></param>
   /// <returns></returns>
-  public static string[] GetPropertiesJson(this Type type, bool exclude_id = false)
+  public static string[] GetPropertiesJson(this Type type)
   {
     // ensure properties can be found
     var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -43,15 +43,15 @@ public static class Extensions
     }
 
     // add properties of T to fields
-    var fields = properties.Select(f =>
+    var fields = properties.Select(p =>
     {
-      var j = f.GetAttribute<JsonPropertyAttribute>();
-      return (j != null) ? $"{j.PropertyName}" : $"{f.Name}";
+      var j = p.GetAttribute<JsonPropertyAttribute>();
+      return (j != null) ? $"{j.PropertyName}" : $"{p.Name}";
     }).ToList();
 
     return [.. fields];
 
-  } //end public static Collection<string> GetPropertiesJson
+  } //end public static string[] GetPropertiesJson
 
 
   /// <summary>
