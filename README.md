@@ -32,52 +32,150 @@
 
 ## Usage  
 ```csharp
-static readonly string COMPANY_SUBDOMAIN = "yourcompany";
-static readonly string API_KEY = "YourBamb00HRAPIKey";
-
-static readonly int BAMBOO_ID = 123;
-static readonly DateTime START_DATE = new(2024, 11, 30);
-static readonly DateTime END_DATE = new(2024, 12, 13);
-
-try
+public class Program
 {
-  var bambooClient = new BambooClient(COMPANY_SUBDOMAIN, API_KEY);
+  private static readonly string COMPANY_SUBDOMAIN = "yourcompany";
+  private static readonly string API_KEY = "YourBamb00HRAPIKey";
 
-  var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(START_DATE, END_DATE);
-  Console.WriteLine($"TimeTracking.GetTimesheetEntriesAsync Results: {timesheets.Count}");
+  private static readonly int BAMBOO_ID = 225;
+  private static readonly DateTime START_DATE = new(2024, 11, 30);
+  private static readonly DateTime END_DATE = new(2024, 12, 13);
 
-  var requests = await bambooClient.TimeOff.GetRequestsAsync(START_DATE, END_DATE);
-  Console.WriteLine($"TimeOff.GetRequestsAsync Results: {requests.Count}");
 
-  var whosout = await bambooClient.TimeOff.GetWhosOutAsync(START_DATE, END_DATE);
-  Console.WriteLine($"TimeOff.GetWhosOutAsync Results: {whosout.Count}");
+  public static async Task Main()
+  {
+    try
+    {
+      System.Console.WriteLine("Running...");
 
-  var employeedata = await bambooClient.Employees.GetEmployeeDataAsync(BAMBOO_ID);
-  Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.FirstName} {employeedata.LastName}");
+      var bambooClient = new BambooClient(COMPANY_SUBDOMAIN, API_KEY);
+      //var bambooClient = new BambooClient(COMPANY_SUBDOMAIN, API_KEY, DATE_FORMAT);
 
-  var ex_employeedata = await bambooClient.Employees.GetEmployeeDataAsync<ExtendedEmployeeData>(BAMBOO_ID);
-  Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {ex_employeedata.FirstName} {ex_employeedata.LastName}, Hours: {ex_employeedata.HoursPerWeek}");
+      var timesheets = await bambooClient.TimeTracking.GetTimesheetEntriesAsync(START_DATE, END_DATE);
+      System.Console.WriteLine($"TimeTracking.GetTimesheetEntriesAsync Results: {timesheets.Count}");
 
-  var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
-  Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
+      var requests = await bambooClient.TimeOff.GetRequestsAsync(START_DATE, END_DATE);
+      System.Console.WriteLine($"TimeOff.GetRequestsAsync Results: {requests.Count}");
 
-  var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeData>("employee",
-    new(FiltersMatch.ANY,
-    [
-      new("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString(bambooClient.DateFormat))
-    ]),
-    [
-      new("hireDate", SortDirection.DESC),
-      new("lastName", SortDirection.ASC),
-      new("firstName", SortDirection.ASC)
-    ]
-  );
-  Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
-}
-catch (Exception ex)
+      var whosout = await bambooClient.TimeOff.GetWhosOutAsync(START_DATE, END_DATE);
+      System.Console.WriteLine($"TimeOff.GetWhosOutAsync Results: {whosout.Count}");
+
+      var employeedata = await bambooClient.Employees.GetEmployeeDataAsync(BAMBOO_ID);
+      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.EmployeeNumber} {employeedata.FirstName} {employeedata.LastName}");
+
+      var ex_employeedata = await bambooClient.Employees.GetEmployeeDataAsync<ExtendedEmployeeData>(BAMBOO_ID);
+      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {ex_employeedata}");
+
+      var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
+      System.Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
+
+      var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeDataset>("employee",
+        new(FiltersMatch.ANY,
+        [
+          new("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString(bambooClient.DateFormat))
+        ]),
+        [
+          new("hireDate", SortDirection.DESC),
+          new("lastName", SortDirection.ASC),
+          new("firstName", SortDirection.ASC)
+        ]
+      );
+      System.Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
+      foreach (var datarow in dataset)
+      {
+        System.Console.WriteLine($"\t{datarow}");
+      }
+
+      System.Console.WriteLine("Done.");
+      System.Console.ReadLine();
+    }
+    catch (Exception ex)
+    {
+      System.Console.WriteLine(ex.ToString());
+    }
+
+  } //end public static async void Main()
+
+} //end public class Program
+
+
+internal class ExtendedEmployeeData : EmployeeData
 {
-  Console.WriteLine(ex.ToString());
-}
+  [JsonProperty("jobTitle")]
+  public string JobTitle { get; set; }
+
+  [JsonProperty("payGroup")]
+  public string PayGroup { get; set; }
+
+  /// <summary>
+  /// Override ToString()
+  /// </summary>
+  /// <returns></returns>
+  public override string ToString()
+  {
+    return $"{Id}: #{EmployeeNumber} {FirstName} {LastName}, Position: {JobTitle}, Pay Group: {PayGroup}";
+  }
+
+} //end internal class ExtendedEmployeeData : EmployeeData
+
+
+internal class ExtendedEmployeeDataset : EmployeeDataset
+{
+  [JsonProperty("jobInformationJobTitle")]
+  public string JobTitle { get; set; }
+
+  [JsonProperty("payGroup")]
+  public string PayGroup { get; set; }
+
+  /// <summary>
+  /// Override ToString()
+  /// </summary>
+  /// <returns></returns>
+  public override string ToString()
+  {
+    return $"{Id}: #{EmployeeNumber} {FirstName} {LastName}, Position: {JobTitle}, Pay Group: {PayGroup}";
+  }
+
+} //end internal class ExtendedEmployeeDataset : EmployeeDataset
+
+
+internal class JobInfoData : DataAbstract
+{
+  //public int Id { get; set; }
+
+  [JsonProperty("employeeNumber")]
+  public int EmployeeNumber { get; set; }
+
+  [JsonProperty("date")]
+  public DateTime? Date { get; set; }
+
+  [JsonProperty("location")]
+  public string Location { get; set; }
+
+  [JsonProperty("department")]
+  public string Department { get; set; }
+
+  [JsonProperty("division")]
+  public string Division { get; set; }
+
+  [JsonProperty("jobTitle")]
+  public string JobTitle { get; set; }
+
+  [JsonProperty("reportsTo")]
+  public string ReportsTo { get; set; }
+
+
+  /// <summary>
+  /// Override ToString()
+  /// </summary>
+  /// <returns></returns>
+  public override string ToString()
+  {
+    return $"Date: {Date:yyyy-MM-dd}, Location: {Location}, Department: {Department}, Division: {Division}, JobTitle: {JobTitle}, ReportsTo: {ReportsTo}";
+  }
+
+} //end internal class TableData : DataAbstract
+
 ```
 
 ## Reference

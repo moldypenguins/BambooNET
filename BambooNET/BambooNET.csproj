@@ -23,7 +23,7 @@
     <PackageProjectUrl>https://github.com/moldypenguins/BambooNET</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>0.1.13</Version>
+    <Version>0.1.14</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <FileVersion>$(Version)</FileVersion>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>

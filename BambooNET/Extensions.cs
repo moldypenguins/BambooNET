@@ -36,11 +36,12 @@ public static class Extensions
   public static string[] GetPropertiesJson(this Type type, bool exclude_id = false)
   {
     // ensure properties can be found
-    var properties = type.GetProperties();
+    var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
     if (properties == null || properties.Length <= 0)
     {
       throw new Exception($"Unable to find properties of type {type}");
     }
+
     // add properties of T to fields
     var fields = properties.Select(f =>
     {
@@ -48,12 +49,6 @@ public static class Extensions
       return (j != null) ? $"{j.PropertyName}" : $"{f.Name}";
     }).ToList();
 
-    // filter id field
-    if (exclude_id) 
-    {
-      fields.RemoveAll(p => p.Equals("id", StringComparison.OrdinalIgnoreCase));
-    }
-    
     return [.. fields];
 
   } //end public static Collection<string> GetPropertiesJson
