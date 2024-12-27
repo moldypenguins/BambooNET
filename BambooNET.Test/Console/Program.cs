@@ -36,7 +36,7 @@ public class Program
   private static readonly DateTime END_DATE = new(2024, 12, 13);
 
 
-  public static async Task Main(string[] args)
+  public static async Task Main()
   {
     try
     {
@@ -55,15 +55,15 @@ public class Program
       System.Console.WriteLine($"TimeOff.GetWhosOutAsync Results: {whosout.Count}");
 
       var employeedata = await bambooClient.Employees.GetEmployeeDataAsync(BAMBOO_ID);
-      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.FirstName} {employeedata.LastName}");
+      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {employeedata.EmployeeNumber} {employeedata.FirstName} {employeedata.LastName}");
 
       var ex_employeedata = await bambooClient.Employees.GetEmployeeDataAsync<ExtendedEmployeeData>(BAMBOO_ID);
-      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {ex_employeedata.FirstName} {ex_employeedata.LastName}, Hours: {ex_employeedata.HoursPerWeek}");
+      System.Console.WriteLine($"Employees.GetEmployeeDataAsync Results: {ex_employeedata}");
 
       var tabledata = await bambooClient.Employees.GetTabularDataAsync<JobInfoData>(BAMBOO_ID, "jobInfo");
       System.Console.WriteLine($"Employees.GetTabularDataAsync Results: {tabledata.Count}");
 
-      var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeData>("employee",
+      var dataset = await bambooClient.Datasets.GetDatasetDataAsync<ExtendedEmployeeDataset>("employee",
         new(FiltersMatch.ANY,
         [
           new("hireDate", FilterOperator.GreaterThanOrEqual, START_DATE.ToString(bambooClient.DateFormat))
@@ -75,6 +75,12 @@ public class Program
         ]
       );
       System.Console.WriteLine($"Datasets.GetDatasetData Results: {dataset.Count}");
+
+      foreach (var datarow in dataset)
+      {
+        System.Console.WriteLine($"\t{datarow}");
+      }
+
 
       System.Console.WriteLine("Done.");
       System.Console.ReadLine();
@@ -94,13 +100,31 @@ public class Program
 
 internal class ExtendedEmployeeData : EmployeeData
 {
-  [JsonProperty("customField4664")]
-  public DateTime? HoursPerWeekDate { get; set; }
+  [JsonProperty("jobTitle")]
+  public string JobTitle { get; set; }
 
-  [JsonProperty("customField4665")]
-  public float? HoursPerWeek { get; set; }
+  [JsonProperty("payGroup")]
+  public string PayGroup { get; set; }
+
+  public override string ToString()
+  {
+    return $"{EmployeeNumber} {FirstName} {LastName}, Position: {JobTitle}, Pay Group: {PayGroup}";
+  }
 }
 
+internal class ExtendedEmployeeDataset : EmployeeData
+{
+  [JsonProperty("jobInformationJobTitle")]
+  public string JobTitle { get; set; }
+
+  [JsonProperty("payGroup")]
+  public string PayGroup { get; set; }
+
+  public override string ToString()
+  {
+    return $"{EmployeeNumber} {FirstName} {LastName}, Position: {JobTitle}, Pay Group: {PayGroup}";
+  }
+}
 
 
 internal class JobInfoData : DataAbstract

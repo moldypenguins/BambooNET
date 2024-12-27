@@ -14,9 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BambooNET.Test.Console", "BambooNET.Test\BambooNET.Test.Console\BambooNET.Test.Console.csproj", "{70EB548B-B8D0-4EBD-B48A-E25735D1472C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BambooNET.Test.Console", "BambooNET.Test\Console\BambooNET.Test.Console.csproj", "{70EB548B-B8D0-4EBD-B48A-E25735D1472C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BambooNET.Test.WinUI", "BambooNET.Test\BambooNET.Test.WinUI\BambooNET.Test.WinUI.csproj", "{5ACDA554-A9F6-44D0-ADB7-7C4172C7D72A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BambooNET.Test.WinUI", "BambooNET.Test\WinUI\BambooNET.Test.WinUI.csproj", "{5ACDA554-A9F6-44D0-ADB7-7C4172C7D72A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -134,7 +134,7 @@ public partial class BambooClient
           // add to querystring
           foreach (var m in meta)
           {
-            request.AddParameter(m.Name, m.Value, ParameterType.QueryString);
+            request.AddParameter(m.Key, m.Value, ParameterType.QueryString);
           }
           break;
         case Method.Post:
@@ -143,9 +143,9 @@ public partial class BambooClient
           Dictionary<string, object> obj = [];
           foreach (var m in meta)
           {
-            obj.Add(m.Name, m.Value);
+            obj.Add(m.Key, m.Value);
           }
-          request.AddBody(JsonConvert.SerializeObject(obj));
+          request.AddBody(obj);
           break;
         case Method.Delete:
           // no parameters

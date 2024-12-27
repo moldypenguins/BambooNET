@@ -1,7 +1,4 @@
-﻿using BambooNET.Models;
-using RestSharp.Extensions;
-
-/// <summary>
+﻿/// <summary>
 /// BambooNET
 /// Copyright(c) 2024 CR Development
 /// 
@@ -21,6 +18,8 @@ using RestSharp.Extensions;
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
+using RestSharp.Extensions;
+
 namespace BambooNET;
 
 /// <summary>
@@ -32,8 +31,9 @@ public static class Extensions
   /// Extends System.Type
   /// </summary>
   /// <param name="type"></param>
+  /// <param name="exclude_id"></param>
   /// <returns></returns>
-  public static Collection<string> GetPropertiesJson(this Type type)
+  public static string[] GetPropertiesJson(this Type type, bool exclude_id = false)
   {
     // ensure properties can be found
     var properties = type.GetProperties();
@@ -42,11 +42,19 @@ public static class Extensions
       throw new Exception($"Unable to find properties of type {type}");
     }
     // add properties of T to fields
-    return new Collection<string>(properties.Select(f =>
+    var fields = properties.Select(f =>
     {
       var j = f.GetAttribute<JsonPropertyAttribute>();
       return (j != null) ? $"{j.PropertyName}" : $"{f.Name}";
-    }).ToList()); 
+    }).ToList();
+
+    // filter id field
+    if (exclude_id) 
+    {
+      fields.RemoveAll(p => p.Equals("id", StringComparison.OrdinalIgnoreCase));
+    }
+    
+    return [.. fields];
 
   } //end public static Collection<string> GetPropertiesJson
 

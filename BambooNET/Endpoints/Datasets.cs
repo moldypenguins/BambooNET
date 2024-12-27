@@ -18,14 +18,8 @@
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
-using System.Web;
-using System;
 using BambooNET.Models;
 using RestSharp;
-using RestSharp.Extensions;
-
-using Page = (int Current, int Total);
-using System.Collections.Specialized;
 
 namespace BambooNET.Endpoints;
 
@@ -88,16 +82,16 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
     try
     {
       // set required parameters
-      MetaData metadata = [new("fields", typeof(T).GetPropertiesJson())];
+      var metadata = new MetaData() { { "fields", typeof(T).GetPropertiesJson(true) } };
 
       // set optional parameters
-      if (sort_by != null) { metadata.Add(new("sortBy", sort_by)); }
+      if (sort_by != null) { metadata.Add("sortBy", sort_by); }
 
       // groupBy
 
       // aggregations
 
-      if (filters != null) { metadata.Add(new("filters", filters)); }
+      if (filters != null) { metadata.Add("filters", filters); }
 
       Collection<T> data = [];
       DatasetData<T>? query = null;
@@ -110,11 +104,8 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
           var query_params = new Uri(query.Pagination.NextPage).ParseQueryString();
           if (query_params.TryGetValue("page", out var value))
           {
-            if (metadata.Any(p => p.Name == "page")) 
-            {
-              metadata.RemoveAt(metadata.IndexOf(metadata.First(p => p.Name == "page")));
-            }
-            metadata.Add(new("page", value));
+            metadata.Remove("page");
+            metadata.Add("page", value);
           }
         }
 
@@ -133,7 +124,7 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
     }
     catch (Exception ex)
     {
-      throw new Exception($"BambooNET.Endpoints.Datasets.GetDataSetsAsync", ex);
+      throw new Exception($"BambooNET.Endpoints.Datasets.GetDatasetDataAsync", ex);
     }
 
   } //end public async Task<DatasetData<T>> GetDatasetDataAsync<T>

@@ -48,17 +48,16 @@ public class TimeOff(BambooClient bamboo_client) : EndpointAbstract(bamboo_clien
   public async Task<Collection<TimeOffRequest>> GetRequestsAsync(DateTime start_date, DateTime end_date, int? id = null, string? action = null, int? employee_number = null, int[]? types = null, string[]? statuses = null)
   {
     // set required parameters
-    MetaData metadata = 
-    [
-      new("start", $"{start_date.ToString(_BambooClient.DateFormat)}"),
-      new("end", $"{end_date.ToString(_BambooClient.DateFormat)}")
-    ];
+    var metadata = new MetaData() {
+      { "start", $"{start_date.ToString(_BambooClient.DateFormat)}" },
+      { "end", $"{end_date.ToString(_BambooClient.DateFormat)}" }
+    };
     // set optional parameters
-    if (id != null) { metadata.Add(new("id", $"{id}")); }
-    if (action != null) { metadata.Add(new("id", $"{action}")); }
-    if (employee_number != null) { metadata.Add(new("employeeNumber", $"{employee_number}")); }
-    if (types != null) { metadata.Add(new("type", $"{types}")); }
-    if (statuses != null) { metadata.Add(new("status", $"{statuses}")); }
+    if (id != null) { metadata.Add("id", $"{id}"); }
+    if (action != null) { metadata.Add("id", $"{action}"); }
+    if (employee_number != null) { metadata.Add("employeeNumber", $"{employee_number}"); }
+    if (types != null) { metadata.Add("type", $"{types}"); }
+    if (statuses != null) { metadata.Add("status", $"{statuses}"); }
 
     try
     {
@@ -84,8 +83,8 @@ public class TimeOff(BambooClient bamboo_client) : EndpointAbstract(bamboo_clien
     // set required parameters
     MetaData metadata = [];
     // set optional parameters
-    if (start_date != null) { metadata.Add(new("start", $"{start_date.Value.ToString(_BambooClient.DateFormat)}")); }
-    if (end_date != null) { metadata.Add(new("end", $"{end_date.Value.ToString(_BambooClient.DateFormat)}")); }
+    if (start_date != null) { metadata.Add("start", $"{start_date.Value.ToString(_BambooClient.DateFormat)}"); }
+    if (end_date != null) { metadata.Add("end", $"{end_date.Value.ToString(_BambooClient.DateFormat)}"); }
 
     try
     {
