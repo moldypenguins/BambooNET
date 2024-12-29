@@ -80,19 +80,32 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
     }
 
   } //end public async Task<Collection<T>> GetEmployeeDataAsync<T>
-  
+
 
   /// <summary>
-  /// Get employee data by specifying a set of fields. This is suitable for getting basic employee information, 
-  /// including current values for fields that are part of a historical table, like job title, or compensation information. 
-  /// See the fields endpoint for a list of possible fields.
+  /// Get employee data with default fields by specifying a dynamic object. 
   /// </summary>
   /// <param name="id"></param>
+  /// <param name="fields"></param>
   /// <param name="only_current"></param>
   /// <returns></returns>
-  public async Task<EmployeeData> GetEmployeeDataAsync(int id, bool? only_current = null)
+  public async Task<dynamic> GetEmployeeDataAsync(int id, string[] fields, bool? only_current = null)
   {
-    return await GetEmployeeDataAsync<EmployeeData>(id, only_current);
+    // set required parameters
+    var metadata = new MetaData() { { "fields", string.Join(',', fields) } };
+
+    // set optional parameters
+    if (only_current != null) { metadata.Add("onlyCurrent", $"{only_current.Value.ToString().ToLower()}"); }
+
+    // execute request
+    try
+    {
+      return await _BambooClient.ExecuteRequestAsync<dynamic>(Method.Get, $"/v1/employees/{id}", metadata);
+    }
+    catch (Exception ex)
+    {
+      throw new Exception($"BambooEndpoint: Employees.GetEmployeeDataAsync", ex);
+    }
 
   } //end public async Task<EmployeeData> GetEmployeeDataAsync
 
@@ -111,6 +124,28 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
     try
     {
       return await _BambooClient.ExecuteRequestAsync<Collection<T>>(Method.Get, $"/v1/employees/{id}/tables/{table}");
+    }
+    catch (Exception ex)
+    {
+      throw new Exception($"BambooEndpoint: Employees.GetTabularDataAsync", ex);
+    }
+
+  } //end public async Task<Collection<T>> GetTabularDataAsync<T>
+
+
+  /// <summary>
+  /// Returns a dynamic data structure representing all the table rows for a given employee and table combination. The result is not sorted in any particular order.
+  /// </summary>
+  /// <param name="id"></param>
+  /// <param name="table"></param>
+  /// <returns></returns>
+  /// <exception cref="Exception"></exception>
+  public async Task<Collection<dynamic>> GetTabularDataAsync(int id, string table)
+  {
+    //execute request
+    try
+    {
+      return await _BambooClient.ExecuteRequestAsync<Collection<dynamic>>(Method.Get, $"/v1/employees/{id}/tables/{table}");
     }
     catch (Exception ex)
     {
