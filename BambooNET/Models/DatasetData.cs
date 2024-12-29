@@ -23,8 +23,8 @@ namespace BambooNET.Models;
 /// <summary>
 /// DatasetData
 /// </summary>
-/// <typeparam name="T"><see cref="DataAbstract"/></typeparam>
-public class DatasetData<T>(Collection<T> data, string[] aggregations, DatasetPagination pagination) where T : DataAbstract
+/// <typeparam name="T"><see cref="IDataset"/></typeparam>
+public class DatasetData<T>(Collection<T> data, string[] aggregations, DatasetPagination pagination) where T : IDataset
 {
   /// <summary>
   /// Data

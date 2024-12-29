@@ -23,9 +23,18 @@ namespace BambooNET.Models;
 /// <summary>
 /// ProjectInfo
 /// </summary>
-public class ProjectInfo
+public class ProjectInfo(ProjectInfoProject? project, ProjectInfoTask? task)
 {
-  public ProjectInfoProject Project { get; set; }
-  public ProjectInfoTask Task { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("project")]
+  public ProjectInfoProject? Project { get; set; } = project;
+
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("task")]
+  public ProjectInfoTask? Task { get; set; } = task;
 
 } //end public class ProjectInfo

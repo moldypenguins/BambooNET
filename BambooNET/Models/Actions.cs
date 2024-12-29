@@ -25,11 +25,22 @@ namespace BambooNET.Models;
 /// </summary>
 public class Actions
 {
+  [JsonProperty("view")]
   public bool View { get; set; }
+
+  [JsonProperty("edit")]
   public bool Edit { get; set; }
+
+  [JsonProperty("cancel")]
   public bool Cancel { get; set; }
+
+  [JsonProperty("approve")]
   public bool Approve { get; set; }
+
+  [JsonProperty("deny")]
   public bool Deny { get; set; }
+
+  [JsonProperty("bypass")]
   public bool Bypass { get; set; }
 
 } //end public class Actions

@@ -14,7 +14,7 @@
 /// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 /// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// 
-/// @name EmployeeDataset.cs
+/// @name IDataset.cs
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
@@ -22,52 +22,9 @@ namespace BambooNET.Models;
 
 
 /// <summary>
-/// EmployeeDataset
+/// IDataset
 /// </summary>
-public class EmployeeDataset : IDataset
+public interface IDataset
 {
-  /// <summary>
-  /// EEID
-  /// </summary>
-  [JsonProperty("eeid")]
-  public int EEID { get; set; }
 
-  /// <summary>
-  /// EmployeeNumber
-  /// </summary>
-  [JsonProperty("employeeNumber")]
-  public int? EmployeeNumber { get; set; }
-
-
-  /// <summary>
-  /// Status
-  /// </summary>
-  [JsonProperty("status")]
-  public string Status { get; set; } = string.Empty;
-
-
-  /// <summary>
-  /// FirstName
-  /// </summary>
-  [JsonProperty("firstName")]
-  public string FirstName { get; set; } = string.Empty;
-
-
-  /// <summary>
-  /// LastName
-  /// </summary>
-  [JsonProperty("lastName")]
-  public string LastName { get; set; } = string.Empty;
-
-
-  /// <summary>
-  /// Override base ToString()
-  /// </summary>
-  /// <returns></returns>
-  public override string ToString()
-  {
-    return $"EEID: {EEID}, EmployeeNumber: {EmployeeNumber}, Status: {Status}, FirstName: {FirstName}, LastName: {LastName}";
-  }
-
-
-} //end public class EmployeeDataset
+} //end public interface IDataset

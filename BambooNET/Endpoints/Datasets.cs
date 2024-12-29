@@ -77,7 +77,7 @@ public class Datasets(BambooClient bamboo_client) : EndpointAbstract(bamboo_clie
   /// </summary>
   /// <typeparam name="T"></typeparam>
   /// <returns></returns>
-  public async Task<Collection<T>> GetDatasetDataAsync<T>(string dataset_name, DatasetFilters? filters = null, DatasetSortBy? sort_by = null) where T : DataAbstract
+  public async Task<Collection<T>> GetDatasetDataAsync<T>(string dataset_name, DatasetFilters? filters = null, DatasetSortBy? sort_by = null) where T : IDataset
   {
     try
     {

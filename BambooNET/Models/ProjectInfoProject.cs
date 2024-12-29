@@ -23,10 +23,12 @@ namespace BambooNET.Models;
 /// <summary>
 /// ProjectInfoProject
 /// </summary>
-public class ProjectInfoProject
+public class ProjectInfoProject(string name) : DataAbstract
 {
-  public int Id { get; set; }
-  public string Name { get; set; }
+  //public int Id { get; set; }
+
+  [JsonProperty("name")]
+  public string Name { get; set; } = name;
 
   public override string ToString()
   {

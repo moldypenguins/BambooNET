@@ -23,23 +23,50 @@ namespace BambooNET.Models;
 /// <summary>
 /// TimeOffRequest
 /// </summary>
-public class TimeOffRequest
+public class TimeOffRequest : DataAbstract
 {
-  public int Id { get; set; }
-  public int EmployeeNumber { get; set; }
+  //public int Id { get; set; }
+
+  [JsonProperty("employeeId")]
+  public int EEID { get; set; }
+
+  [JsonProperty("name")]
   public string Name { get; set; }
+
+  [JsonProperty("status")]
   public TimeOffStatus Status { get; set; }
+
+  [JsonProperty("start")]
   public DateTime Start { get; set; }
+
+  [JsonProperty("end")]
   public DateTime End { get; set; }
+
+  [JsonProperty("created")]
   public DateTime Created { get; set; }
+
+  [JsonProperty("type")]
   public TimeOffType Type { get; set; }
+
+  [JsonProperty("amount")]
   public TimeOffAmount Amount { get; set; }
+
+  [JsonProperty("actions")]
   public Actions Actions { get; set; }
+
+  [JsonProperty("dates")]
   public Dictionary<DateTime, float> Dates { get; set; } = [];
+
+  [JsonProperty("notes")]
   public TimeOffNotes Notes { get; set; }
+
+  /// <summary>
+  /// Override ToString()
+  /// </summary>
+  /// <returns></returns>
   public override string ToString()
   {
-    return $"ID: {Id}, Type: {Type}, EmployeeNumber: {EmployeeNumber}, Name: {Name}, Status: {Status} " + 
+    return $"ID: {Id}, Type: {Type}, EEID: {EEID}, Name: {Name}, Status: {Status} " + 
       $"Start: {Start.ToString("yyyy-MM-dd")}, End: {End.ToString("yyyy-MM-dd")}, Created: {Created.ToString("yyyy-MM-dd")} " + 
       $"Type: {Type}, Amount: {Amount}";
 

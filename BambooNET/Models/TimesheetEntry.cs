@@ -23,24 +23,47 @@ namespace BambooNET.Models;
 /// <summary>
 /// TimesheetEntry
 /// </summary>
-public class TimesheetEntry
+public class TimesheetEntry : DataAbstract
 {
-  public int Id { get; set; }
-  public int EmployeeNumber { get; set; }
+  //public int Id { get; set; }
+
+  [JsonProperty("employeeId")]
+  public int EEID { get; set; }
+
+  [JsonProperty("type")]
   public string Type { get; set; }
+
+  [JsonProperty("date")]
   public DateTime Date { get; set; }
+
+  [JsonProperty("start")]
   public DateTime? Start { get; set; }
+
+  [JsonProperty("end")]
   public DateTime? End { get; set; }
+
+  [JsonProperty("timezone")]
   public string? Timezone { get; set; }
+
+  [JsonProperty("hours")]
   public float Hours { get; set; }
+
+  [JsonProperty("note")]
   public string? Note { get; set; }
+
+  [JsonProperty("projectInfo")]
   public ProjectInfo? ProjectInfo { get; set; }
+
+  [JsonProperty("approvedAt")]
   public DateTime? ApprovedAt { get; set; }
+
+  [JsonProperty("approved")]
   public bool Approved { get; set; }
+
+
   public override string ToString()
   {
-    return $"ID: {Id}, Type: {Type}, EmployeeNumber: {EmployeeNumber}, Type: {Type} " +
-      $"Date: {Date:yyyy-MM-dd}, Hours: {Hours}, Note: {Note}, Approved: {Approved} ";
+    return $"EEID: {EEID}, Type: {Type}, Date: {Date:yyyy-MM-dd}, Hours: {Hours}, Note: {Note}, Approved: {Approved} ";
 
   } //end public override string ToString
 

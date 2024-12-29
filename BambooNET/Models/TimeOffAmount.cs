@@ -23,11 +23,24 @@ namespace BambooNET.Models;
 /// <summary>
 /// TimeOffAmount
 /// </summary>
-public class TimeOffAmount
+public class TimeOffAmount(string unit, float amount)
 {
-  public string Unit { get; set; }
-  public float Amount { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("unit")]
+  public string Unit { get; set; } = unit;
 
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("amount")]
+  public float Amount { get; set; } = amount;
+
+  /// <summary>
+  /// Override ToString()
+  /// </summary>
+  /// <returns></returns>
   public override string ToString()
   {
     return $"{Amount} {Unit}";

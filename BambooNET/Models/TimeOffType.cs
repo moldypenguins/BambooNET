@@ -23,12 +23,30 @@ namespace BambooNET.Models;
 /// <summary>
 /// TimeOffType
 /// </summary>
-public class TimeOffType
+public class TimeOffType(int id, string name, string icon)
 {
-  public int Id { get; set; }
-  public string Name { get; set; }
-  public string Icon { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("id")]
+  public int Id { get; set; } = id;
 
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("name")]
+  public string Name { get; set; } = name;
+
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("icon")]
+  public string Icon { get; set; } = icon;
+
+  /// <summary>
+  /// Override ToString()
+  /// </summary>
+  /// <returns></returns>
   public override string ToString()
   {
     return $"{Name}";

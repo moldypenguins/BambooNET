@@ -23,9 +23,12 @@ namespace BambooNET.Models;
 /// <summary>
 /// TimeOffNotes
 /// </summary>
-public class TimeOffNotes
+public class TimeOffNotes(string employee, string manager)
 {
-  public string Employee { get; set; }
-  public string Manager { get; set; }
+  [JsonProperty("employee")]
+  public string Employee { get; set; } = employee;
+
+  [JsonProperty("manager")]
+  public string Manager { get; set; } = manager;
 
 } //end public class TimeOffNotes

@@ -23,14 +23,30 @@ namespace BambooNET.Models;
 /// <summary>
 /// TimeOffStatus
 /// </summary>
-public class TimeOffStatus
+public class TimeOffStatus(DateTime last_changed, int last_changed_by, string status)
 {
-  public DateTime LastChanged { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("lastChanged")]
+  public DateTime LastChanged { get; set; } = last_changed;
 
-  public int LastChangedByUserId { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("lastChangedByUserId")]
+  public int LastChangedByUserId { get; set; } = last_changed_by;
 
-  public string Status { get; set; }
+  /// <summary>
+  /// 
+  /// </summary>
+  [JsonProperty("status")]
+  public string Status { get; set; } = status;
 
+  /// <summary>
+  /// Override ToString()
+  /// </summary>
+  /// <returns></returns>
   public override string ToString()
   {
     return $"{Status}";
