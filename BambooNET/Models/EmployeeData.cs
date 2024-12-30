@@ -23,9 +23,13 @@ namespace BambooNET.Models;
 /// <summary>
 /// EmployeeData
 /// </summary>
-public class EmployeeData : DataAbstract
+public class EmployeeData
 {
-  //public int Id { get; set; }
+  /// <summary>
+  /// EEID
+  /// </summary>
+  [JsonProperty("id")]
+  public int EEID { get; set; }
 
   /// <summary>
   /// EmployeeNumber
@@ -57,7 +61,7 @@ public class EmployeeData : DataAbstract
   /// <returns></returns>
   public override string ToString()
   {
-    return $"Id: {Id}, EmployeeNumber: {EmployeeNumber}, Status: {Status}, FirstName: {FirstName}, LastName: {LastName}";
+    return $"EEID: {EEID}, EmployeeNumber: {EmployeeNumber}, Status: {Status}, FirstName: {FirstName}, LastName: {LastName}";
   }
 
-} //end internal class EmployeeData : DataAbstract
+} //end internal class EmployeeData

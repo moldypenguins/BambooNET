@@ -23,12 +23,34 @@ namespace BambooNET.Models;
 /// <summary>
 /// BambooField
 /// </summary>
-public class BambooField : DataAbstract
+/// <param name="id"></param>
+/// <param name="name"></param>
+/// <param name="type"></param>
+/// <param name="alias"></param>
+public class BambooField(int id, string name, string type, string? alias = default)
 {
-  //public string Id { get; set; } = id;
+  /// <summary>
+  /// Id
+  /// </summary>
+  [JsonProperty("id")]
+  public int Id { get; set; } = id;
 
-  public string? Type { get; set; }
-  public string? Name { get; set; }
-  public string? Alias { get; set; }
+  /// <summary>
+  /// Name
+  /// </summary>
+  [JsonProperty("name")]
+  public string Name { get; set; } = name;
 
-} //end public class BambooField : DataAbstract
+  /// <summary>
+  /// Type
+  /// </summary>
+  [JsonProperty("type")]
+  public string Type { get; set; } = type;
+
+  /// <summary>
+  /// Alias
+  /// </summary>
+  [JsonProperty("alias")]
+  public string? Alias { get; set; } = alias;
+
+} //end public class BambooField

@@ -28,26 +28,37 @@ public class WhosOut
   /// <summary>
   /// 
   /// </summary>
+  [JsonProperty("id")]
   public int Id { get; set; }
+
   /// <summary>
   /// 
   /// </summary>
+  [JsonProperty("type")]
   public string Type { get; set; }
+
   /// <summary>
   /// 
   /// </summary>
+  [JsonProperty("employeeNumber")]
   public string EmployeeNumber { get; set; }
+
   /// <summary>
   /// 
   /// </summary>
+  [JsonProperty("name")]
   public string Name { get; set; }
+
   /// <summary>
   /// 
   /// </summary>
+  [JsonProperty("start")]
   public DateTime? Start { get; set; }
+
   /// <summary>
   /// 
   /// </summary>
+  [JsonProperty("end")]
   public DateTime? End { get; set; }
 
   /// <summary>

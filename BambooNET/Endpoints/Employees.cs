@@ -118,7 +118,7 @@ public class Employees(BambooClient bamboo_client) : EndpointAbstract(bamboo_cli
   /// <typeparam name="T"><see cref="DataAbstract"/></typeparam>
   /// <returns></returns>
   /// <exception cref="Exception"></exception>
-  public async Task<Collection<T>> GetTabularDataAsync<T>(int id, string table) where T : DataAbstract
+  public async Task<Collection<T>> GetTabularDataAsync<T>(int id, string table)
   {
     //execute request
     try

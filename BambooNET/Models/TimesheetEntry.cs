@@ -23,9 +23,10 @@ namespace BambooNET.Models;
 /// <summary>
 /// TimesheetEntry
 /// </summary>
-public class TimesheetEntry : DataAbstract
+public class TimesheetEntry
 {
-  //public int Id { get; set; }
+  [JsonProperty("id")]
+  public int Id { get; set; }
 
   [JsonProperty("employeeId")]
   public int EEID { get; set; }

@@ -18,6 +18,7 @@
 /// @version 2024-12-20
 /// @author Craig Roberts
 /// </summary>
+using System;
 using BambooNET.Models;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -51,6 +52,7 @@ public partial class BambooClient
   /// <returns></returns>
   [GeneratedRegex(@"[0-9a-zA-Z]")]
   private static partial Regex NumbersLetters();
+
 
 
   #region Endpoints
@@ -95,7 +97,8 @@ public partial class BambooClient
       },
       configureSerialization: s => s.UseNewtonsoftJson()
     );
-    _RestClient.AddDefaultHeader("User-Agent", "BambooHR.NET/2.0.0");
+    var _v = Assembly.GetExecutingAssembly().GetName().Version!;
+    _RestClient.AddDefaultHeader("User-Agent", $"BambooNET/{_v.Major}.{_v.Minor}.{_v.Build}");
     _RestClient.AddDefaultHeader("Content-Type", "application/json");
     _RestClient.AddDefaultHeader("Accept", "application/json");
     _RestClient.AddDefaultHeader("Encoding", "utf-8");
@@ -140,12 +143,8 @@ public partial class BambooClient
         case Method.Post:
         case Method.Put:
           // add to request body
-          Dictionary<string, object> obj = [];
-          foreach (var m in meta)
-          {
-            obj.Add(m.Key, m.Value);
-          }
-          request.AddBody(obj);
+          var jsonBody = JsonConvert.SerializeObject(meta);
+          request.AddJsonBody(jsonBody, false);
           break;
         case Method.Delete:
           // no parameters

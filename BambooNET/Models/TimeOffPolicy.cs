@@ -23,9 +23,10 @@ namespace BambooNET.Models;
 /// <summary>
 /// TimeOffPolicy
 /// </summary>
-public class TimeOffPolicy : DataAbstract
+public class TimeOffPolicy
 {
-  //public int Id { get; set; }
+  [JsonProperty("id")]
+  public int Id { get; set; }
 
   /// <summary>
   /// TimeOffPolicyId
